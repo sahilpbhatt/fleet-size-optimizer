@@ -299,7 +299,7 @@ st.markdown("---")
 
 # Sidebar configuration
 with st.sidebar: 
-    st.image("https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/assets/logo.jpg", use_column_width=True)
+    st.image("https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg", use_column_width=True)
 
     st.header("⚙️ Optimization Parameters")
     
@@ -1281,5 +1281,6 @@ st.markdown("""
 </div>
 
 """, unsafe_allow_html=True)
+
 
 
