@@ -1276,9 +1276,9 @@ with st.expander("⚡ Computational Complexity", expanded=True):
             
             st.latex(r"\text{Action Space: } \mathcal{Y}_t = \{y_{tab} \in \{0,1\} : \forall a \in A_t, b \in B_t^+\}")
             
-            st.markdown("""
-            **Complexity per Component:**
-            """)
+st.markdown("**Complexity per Component:**")
+
+
             
             complexity_df = pd.DataFrame({
                 'Component': ['State Space', 'Action Space', 'VFA Iteration', 'Matching Problem', 'Boltzmann Exploration'],
@@ -1469,6 +1469,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
