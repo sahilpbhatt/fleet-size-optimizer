@@ -377,15 +377,21 @@ with col1:
 with col2:
     st.markdown("**[📧 Email](mailto:sahil.bhatt@torontomu.ca)**")
 with col3:
-    st.markdown("**[💼 LinkedIn](https://linkedin.com/in/sahilbhatt)**")
+    st.markdown("**[💼 LinkedIn](https://linkedin.com/in/sahilpbhatt)**")
 with col4:
-    st.markdown("**[🔗 GitHub](https://github.com/sahilbhatt)**")
+    st.markdown("**[🔗 GitHub](https://github.com/sahilpbhatt)**")
 
 st.markdown("---")
 
 # Sidebar configuration
 with st.sidebar:
-    st.image("https://via.placeholder.com/300x100/667eea/ffffff?text=Fleet+Optimizer", use_column_width=True)
+    # Logo or header image (placeholder - replace with your actual logo)
+    st.markdown("""
+        <div style='text-align: center; padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; margin-bottom: 1rem;'>
+            <h2 style='color: white; margin: 0;'>🚚</h2>
+            <h3 style='color: white; margin: 0;'>Fleet Optimizer</h3>
+        </div>
+    """, unsafe_allow_html=True)
     
     st.header("⚙️ Optimization Parameters")
     
@@ -1232,20 +1238,29 @@ def value_function_approximation(data, params):
         
         with st.expander("⚡ Computational Complexity"):
             st.markdown("""
-            ### Algorithm Complexity
+            ### Algorithm Complexity (from Paper Section 4)
             
-            | Component | Complexity |
-            |-----------|------------|
-            | State Space | O(n_drivers × n_orders) |
-            | Action Space | O(n_drivers × n_orders) |
-            | Value Update | O(iterations × scenarios) |
-            | Matching Problem | O(n³) Hungarian algorithm |
+            | Component | Complexity | Details |
+            |-----------|------------|---------|
+            | State Space | O(|A_t| × |B_t|) | Drivers × Orders at time t |
+            | Action Space | O(|A_t| × |B_t|) | Feasible assignments |
+            | VFA Iterations | O(I × |Ξ|) | I iterations, |Ξ| scenarios |
+            | Matching (MIP) | O(n²·⁵) | Using Gurobi solver |
+            | Per Epoch | O(T × |Ξ| × n²·⁵) | T epochs per scenario |
             
-            ### Optimization Techniques
-            - Parametric cost function approximation
-            - Rolling horizon approach
-            - Parallel scenario evaluation
-            - Cached value functions
+            ### Solution Techniques (Section 4.3)
+            - **Parametric Cost Function Approximation (PCFA)**
+              - Replaces exact value function with parametric form
+              - Reduces state space enumeration
+            - **Rolling Horizon Approach**
+              - Solves sequence of matching problems
+              - Forward-looking via penalty terms
+            - **Monte Carlo Simulation**
+              - Evaluates over |Ξ| = 10 sample paths
+              - Reduces variance in estimates
+            - **Boltzmann Exploration**
+              - Temperature-based probabilistic selection
+              - Balances exploration vs exploitation
             """)
 
 with tab6:
@@ -1389,8 +1404,8 @@ st.markdown("""
     <p style='color: white;'>
         <strong>Sahil Bhatt</strong> | Applied Scientist | Machine Learning & Operations Research<br>
         <a href='mailto:sahil.bhatt@torontomu.ca' style='color: white;'>📧 sahil.bhatt@torontomu.ca</a> | 
-        <a href='https://github.com/sahilbhatt' style='color: white;'>🔗 GitHub</a> | 
-        <a href='https://linkedin.com/in/sahilbhatt' style='color: white;'>💼 LinkedIn</a>
+        <a href='https://github.com/sahilpbhatt' style='color: white;'>🔗 GitHub</a> | 
+        <a href='https://linkedin.com/in/sahilpbhatt' style='color: white;'>💼 LinkedIn</a>
     </p>
 </div>
 """, unsafe_allow_html=True)
