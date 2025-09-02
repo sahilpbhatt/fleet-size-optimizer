@@ -1409,16 +1409,20 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
         CACHE_TTL=3600
         ```
         """)
-    
+
     with st.expander("📊 Data Sources"):
-        st.markdown("""
+        # Chicago Ridehailing Dataset
+        st.markdown('''
         ### Chicago Ridehailing Dataset
         
         **Source:** Chicago Data Portal  
         **Period:** 2018-2022  
         **Records:** 100M+ trips  
-        **Features:** Origin, destination, time, duration  
+        **Features:** Origin, destination, time, duration
+        ''')
         
+            # Synthetic Dataset
+            st.markdown('''
         ### Synthetic Dataset
         
         **Generation Process:**
@@ -1426,10 +1430,11 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
         - Binomial driver arrival
         - Grid network (10×10)
         - 90-minute delivery windows
+        ''')
         
-        ### Preprocessing
-        ```python
-        # Load and filter Chicago data
+            # Preprocessing Code
+            st.markdown('### Preprocessing')
+            st.code('''# Load and filter Chicago data
         df = pd.read_csv('chicago_trips.csv')
         df_filtered = df[df['community_area'].isin([8, 32, 33])]
         
@@ -1438,9 +1443,8 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
             'trip_id': 'count',
             'trip_miles': 'mean'
         })
-        ```
-        """)
-
+        ''', language='python')
+ 
 # Footer
 st.markdown("---")
 st.markdown("""
@@ -1457,6 +1461,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
