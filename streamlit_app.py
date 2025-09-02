@@ -385,13 +385,18 @@ st.markdown("---")
 
 # Sidebar configuration
 with st.sidebar:
-    # Logo or header image (placeholder - replace with your actual logo)
-    st.markdown("""
-        <div style='text-align: center; padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; margin-bottom: 1rem;'>
-            <h2 style='color: white; margin: 0;'>🚚</h2>
-            <h3 style='color: white; margin: 0;'>Fleet Optimizer</h3>
-        </div>
-    """, unsafe_allow_html=True)
+    # Try to load image from GitHub, fallback to styled div if fails
+    try:
+        st.image("https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg", use_column_width=True)
+    except:
+        # Fallback styled logo
+        st.markdown("""
+            <div style='text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; margin-bottom: 1rem;'>
+                <h1 style='color: white; margin: 0; font-size: 3rem;'>🚚</h1>
+                <h3 style='color: white; margin: 0;'>Fleet Optimizer</h3>
+                <p style='color: white; margin: 0; font-size: 0.9rem;'>VFA & MDP Solution</p>
+            </div>
+        """, unsafe_allow_html=True)
     
     st.header("⚙️ Optimization Parameters")
     
@@ -1164,25 +1169,37 @@ with tab5:
     with col1:
         with st.expander("🎯 Problem Formulation", expanded=True):
             st.markdown("""
-            ### Two-Stage Stochastic Optimization
+            ### Two-Stage Stochastic Optimization Model
             
-            **First Stage (Tactical):**
-            - Decision: Fleet size per period `x_p`
-            - Objective: Minimize cost + penalties
+            **First Stage (Tactical Planning):**
             
-            **Second Stage (Operational):**
-            - Markov Decision Process
-            - Dynamic driver-order matching
-            - State: `S_t = (R_t, D_t, K_t)`
+            Decision variables: Fleet size per period
             """)
             
-            st.latex(r"""
-            \min_{x,\alpha} \sum_{p=1}^P c_p x_p + \alpha
+            st.latex(r"x_p \in \mathbb{Z}_{\geq 0}, \quad p \in \{1, ..., P\}")
+            
+            st.markdown("**Objective Function:**")
+            st.latex(r"\min_{x, \alpha} \quad c^T x + \alpha")
+            
+            st.markdown("**Subject to:**")
+            st.latex(r"\alpha \geq w^s f^{serv}(\beta, Q(x)) + (1-w^s) f^{util}(\mu, L(x))")
+            st.latex(r"x \in \mathbb{Z}^P_{\geq 0}")
+            
+            st.markdown("""
+            **Second Stage (Operational MDP):**
+            
+            State space at epoch $t$:
             """)
             
-            st.latex(r"""
-            \text{s.t. } \alpha \geq w_s f^{serv}(\beta, Q(x)) + (1-w_s) f^{util}(\mu, L(x))
-            """)
+            st.latex(r"S_t = (R_t, D_t, K_t)")
+            
+            st.markdown("Where:")
+            st.latex(r"R_t = \text{Driver availability vector}")
+            st.latex(r"D_t = \text{Order demand vector}")
+            st.latex(r"K_t = (B^{total}_t, B^{matched}_t, A^{util}_t, A^{total}_t)")
+            
+            st.markdown("**Bellman Equation:**")
+            st.latex(r"J_t(S_t) = \max_{y_t \in \mathcal{Y}_t} \left\{ C_t(S_t, y_t) + \gamma \sum_{S_{t+1}} P(S_{t+1}|S_t, y_t, x) J_{t+1}(S_{t+1}) \right\}")
         
         with st.expander("🔬 Value Function Approximation"):
             st.code("""
@@ -1215,52 +1232,94 @@ def value_function_approximation(data, params):
     with col2:
         with st.expander("📊 MDP Components", expanded=True):
             st.markdown("""
-            ### State Space
-            - **Drivers**: Location, availability, utilization
-            - **Orders**: Origin, destination, deadline
-            - **Metrics**: Service level, utilization history
+            ### Markov Decision Process Formulation (Section 3.3)
             
-            ### Action Space
-            - Binary matching decisions `y_tab`
-            - Time-feasible assignments only
+            **State Space Components:**
             
-            ### Transition Function
-            - Stochastic driver arrivals (Binomial)
-            - Stochastic order arrivals (Poisson)
-            - Deterministic service times
+            Driver attributes vector:
+            """)
+            st.latex(r"a = (m_a, o_a, h_a, l_a, t^s_a, t^m_a, t^e_a)")
             
-            ### Reward Function
-            ```
-            r_t = profit - w_s * service_penalty 
-                        - (1-w_s) * util_penalty
-            ```
+            st.markdown("Order attributes vector:")
+            st.latex(r"b = (o_b, d_b, [t^{min}_b, t^{max}_b])")
+            
+            st.markdown("**Action Space:**")
+            st.latex(r"\mathcal{Y}_t = \left\{ y \in \{0,1\}^{|A^{avail}_t| \times |B^+_t|} : \sum_{b \in B^+_t} y_{tab} = 1, \forall a \in A^{avail}_t \right\}")
+            
+            st.markdown("**Transition Function:**")
+            st.latex(r"P(S_{t+1} | S_t, y_t, x) = P(W_{t+1}) \cdot \mathbb{1}[S_{t+1} = S^M(S^y_t, W_{t+1})]")
+            
+            st.markdown("Where $W_t$ represents stochastic information:")
+            st.latex(r"\tilde{x}_p \sim \text{Binomial}(x_p, q_p)")
+            st.latex(r"N_t \sim \text{Poisson}(\lambda)")
+            
+            st.markdown("**Reward Function:**")
+            st.latex(r"C_t(S_t, y_t) = \sum_{a \in A_t, b \in B_t} (r(b) - c(a,b)) \cdot y_{tab}")
+            
+            st.markdown("**Terminal Reward:**")
+            st.latex(r"C_T(S_T) = -w^s f^{serv}(\beta, Q(x)) - (1-w^s) f^{util}(\mu, L(x))")
+            
+            st.markdown("""
+            **Performance Metrics:**
+            """)
+            st.latex(r"L(x) = A^{util}_T = \frac{1}{|A^{total}_T|} \sum_{a \in A^{exit}} l_a")
+            st.latex(r"Q(x) = \frac{B^{matched}_T}{B^{total}_T}")
             """)
         
-        with st.expander("⚡ Computational Complexity"):
+        with st.expander("⚡ Computational Complexity", expanded=True):
             st.markdown("""
-            ### Algorithm Complexity (from Paper Section 4)
+            ### Algorithm Complexity Analysis
             
-            | Component | Complexity | Details |
-            |-----------|------------|---------|
-            | State Space | O(|A_t| × |B_t|) | Drivers × Orders at time t |
-            | Action Space | O(|A_t| × |B_t|) | Feasible assignments |
-            | VFA Iterations | O(I × |Ξ|) | I iterations, |Ξ| scenarios |
-            | Matching (MIP) | O(n²·⁵) | Using Gurobi solver |
-            | Per Epoch | O(T × |Ξ| × n²·⁵) | T epochs per scenario |
+            Based on the paper's MDP formulation (Section 3.3) and VFA algorithm (Section 4):
+            """)
             
-            ### Solution Techniques (Section 4.3)
-            - **Parametric Cost Function Approximation (PCFA)**
-              - Replaces exact value function with parametric form
-              - Reduces state space enumeration
-            - **Rolling Horizon Approach**
-              - Solves sequence of matching problems
-              - Forward-looking via penalty terms
-            - **Monte Carlo Simulation**
-              - Evaluates over |Ξ| = 10 sample paths
-              - Reduces variance in estimates
-            - **Boltzmann Exploration**
-              - Temperature-based probabilistic selection
-              - Balances exploration vs exploitation
+            st.latex(r"\text{State Space: } \mathcal{S} = \{(R_t, D_t, K_t)\} \text{ where } |S| = O(|A_t| \times |B_t| \times |K|)")
+            
+            st.latex(r"\text{Action Space: } \mathcal{Y}_t = \{y_{tab} \in \{0,1\} : \forall a \in A_t, b \in B_t^+\}")
+            
+            st.markdown("""
+            **Complexity per Component:**
+            
+            | Component | Complexity | Description |
+            |-----------|------------|-------------|
+            | State Space | $O(\|A_t\| \\times \|B_t\| \\times \|K\|)$ | Drivers × Orders × Performance metrics |
+            | Action Space | $O(\|A_t\| \\times \|B_t\|)$ | Binary matching decisions |
+            | VFA Iteration | $O(I \\times \|\Xi\| \\times T)$ | I iterations, $\|\Xi\|$ scenarios, T epochs |
+            | Matching Problem | $O(n^{2.5})$ | Gurobi MIP solver per epoch |
+            | Boltzmann Exploration | $O(P \\times \|X\|)$ | P periods, $\|X\|$ fleet size options |
+            
+            **Overall VFA Complexity:**
+            """)
+            
+            st.latex(r"O(I \times |\Xi| \times T \times (|A_t| \times |B_t|)^{2.5})")
+            
+            st.markdown("""
+            ### Solution Methods (Section 4)
+            
+            **1. Value Function Approximation (Algorithm 1):**
+            - Iterative search over fleet size space
+            - Convergence in ~1000 iterations
+            - Step size: $\\rho = \\frac{1}{\\sqrt{N(x_p)}}$
+            
+            **2. Boltzmann Exploration (Algorithm 2):**
+            """)
+            
+            st.latex(r"\text{Prob}(x_p) = \frac{e^{-V(p,x_p)/\tau}}{\sum_{x'_p \in \mathcal{X}} e^{-V(p,x'_p)/\tau}}")
+            
+            st.markdown("""
+            Where temperature $\\tau = \\frac{10 \\times d}{i}$ decreases with iterations
+            
+            **3. Parametric Cost Function Approximation (Section 4.3):**
+            """)
+            
+            st.latex(r"\pi_{ab} = r(b) - c(a,b) + (1-w^s)g^{util}(l_a) + w^s g^{serv}(t, t^{max}_b)")
+            
+            st.markdown("""
+            **4. Monte Carlo Simulation:**
+            - $\|\Xi\| = 10$ sample paths (Section 5.1)
+            - Rolling horizon over T = 192 epochs
+            - Parallel evaluation of scenarios
+            """)
             """)
 
 with tab6:
