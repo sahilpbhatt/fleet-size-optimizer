@@ -1266,12 +1266,14 @@ def value_function_approximation(data, params):
             st.latex(r"Q(x) = \frac{B^{matched}_T}{B^{total}_T}")
             """)
         
-        with st.expander("⚡ Computational Complexity", expanded=True):
-            st.markdown("""
-            ### Algorithm Complexity Analysis
-            
-            Based on the paper's MDP formulation (Section 3.3) and VFA algorithm (Section 4):
-            """)
+        with st.expander("⚡ Computational Complexity", expanded=True): 
+            st.markdown(
+                """
+                ### Algorithm Complexity Analysis  
+        
+                Based on the paper's MDP formulation (Section 3.3) and VFA algorithm (Section 4):
+                """
+            ) 
             
             st.latex(r"\text{State Space: } \mathcal{S} = \{(R_t, D_t, K_t)\} \text{ where } |S| = O(|A_t| \times |B_t| \times |K|)")
             
@@ -1470,3 +1472,4 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
