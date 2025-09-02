@@ -1268,9 +1268,7 @@ def value_function_approximation(data, params):
         
         with st.expander("⚡ Computational Complexity", expanded=True):
             st.markdown("""
-            ### Algorithm Complexity Analysis
-            
-            Based on the paper's MDP formulation (Section 3.3) and VFA algorithm (Section 4):
+            ### Algorithm Complexity Analysis 
             """)
             
             st.latex(r"\text{State Space: } \mathcal{S} = \{(R_t, D_t, K_t)\} \text{ where } |S| = O(|A_t| \times |B_t| \times |K|)")
@@ -1468,3 +1466,4 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
