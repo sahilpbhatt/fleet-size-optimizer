@@ -1304,6 +1304,7 @@ st.markdown("**Complexity per Component:**")
             - Iterative search over fleet size space
             - Convergence in ~1000 iterations
             """) 
+            
             st.latex(r"\text{Step size: } \rho = \frac{1}{\sqrt{N(x_p)}}")
             
             st.markdown("**2. Boltzmann Exploration (Algorithm 2):**")
@@ -1468,6 +1469,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
