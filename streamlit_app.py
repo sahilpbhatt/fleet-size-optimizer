@@ -1316,26 +1316,26 @@ with tab6:
     
     with st.expander("📚 Research Paper", expanded=True):
         st.markdown("""
-        ### Fleet Size Planning in Crowdsourced Delivery: Balancing Service Level and Driver Utilization
-        
-        **Authors:** Aliaa Alnaggar, Sahil Bhatt  
-        **Journal:** Omega - The International Journal of Management Science  
-        **Status:** Submitted (2024)
-        
-        **Abstract:**  
-        This paper addresses the fleet size planning problem for crowdsourced delivery platforms, 
-        focusing on optimizing the number of crowdsourced drivers to balance the platform's 
-        service level and driver utilization. We propose a two-stage optimization model where 
-        the first stage involves tactical decisions for determining fleet sizes, while the second 
-        stage captures the operational dynamics through a Markov Decision Process (MDP).
-        
-        **Key Contributions:**
-        1. Novel two-stage optimization framework
-        2. Value Function Approximation (VFA) algorithm
-        3. Handles decision-dependent uncertainty
-        4. Validated on Chicago ridehailing dataset
-        """)
-    
+### Fleet Size Planning in Crowdsourced Delivery: Balancing Service Level and Driver Utilization
+
+**Authors:** Aliaa Alnaggar, Sahil Bhatt  
+**Journal:** Omega - The International Journal of Management Science  
+**Status:** Submitted (2024)
+
+**Abstract:**  
+This paper addresses the fleet size planning problem for crowdsourced delivery platforms, 
+focusing on optimizing the number of crowdsourced drivers to balance the platform's 
+service level and driver utilization. We propose a two-stage optimization model where 
+the first stage involves tactical decisions for determining fleet sizes, while the second 
+stage captures the operational dynamics through a Markov Decision Process (MDP).
+
+**Key Contributions:**
+1. Novel two-stage optimization framework
+2. Value Function Approximation (VFA) algorithm
+3. Handles decision-dependent uncertainty
+4. Validated on Chicago ridehailing dataset
+""")
+
     with st.expander("💻 API Documentation"):
         st.markdown("""
         ### REST API Endpoints
@@ -1457,6 +1457,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
