@@ -1,0 +1,102 @@
+{
+  "optimal_fleet_sizes": {
+    "0.0": {
+      "fleet_sizes": [5, 6, 8, 10, 12, 10, 8, 6, 6, 8, 10, 12, 10, 8, 6, 5, 5, 6, 8, 10, 12, 10, 8, 6],
+      "service_level": 0.29,
+      "utilization": 1.00,
+      "profit": 6030,
+      "description": "Utilization-only optimization"
+    },
+    "0.2": {
+      "fleet_sizes": [18, 20, 25, 30, 35, 30, 25, 20, 20, 25, 30, 35, 30, 25, 20, 18, 18, 20, 25, 30, 35, 30, 25, 20],
+      "service_level": 0.94,
+      "utilization": 0.97,
+      "profit": 14100,
+      "description": "Balanced with utilization priority"
+    },
+    "0.5": {
+      "fleet_sizes": [20, 22, 28, 32, 38, 32, 28, 22, 22, 28, 32, 38, 32, 28, 22, 20, 20, 22, 28, 32, 38, 32, 28, 22],
+      "service_level": 0.97,
+      "utilization": 0.93,
+      "profit": 14100,
+      "description": "Equal weight optimization"
+    },
+    "0.6": {
+      "fleet_sizes": [20, 23, 28, 33, 38, 33, 28, 23, 23, 28, 33, 38, 33, 28, 23, 20, 20, 23, 28, 33, 38, 33, 28, 23],
+      "service_level": 0.98,
+      "utilization": 0.93,
+      "profit": 14100,
+      "description": "Service level priority"
+    },
+    "0.8": {
+      "fleet_sizes": [21, 23, 29, 33, 39, 33, 29, 23, 23, 29, 33, 39, 33, 29, 23, 21, 21, 23, 29, 33, 39, 33, 29, 23],
+      "service_level": 0.98,
+      "utilization": 0.93,
+      "profit": 14000,
+      "description": "High service level priority"
+    },
+    "1.0": {
+      "fleet_sizes": [60, 65, 75, 85, 95, 85, 75, 65, 65, 75, 85, 95, 85, 75, 65, 60, 60, 65, 75, 85, 95, 85, 75, 65],
+      "service_level": 0.97,
+      "utilization": 0.37,
+      "profit": 14600,
+      "description": "Service-only optimization"
+    }
+  },
+  "benchmark_results": {
+    "constant_fleet": {
+      "fleet_size": 400,
+      "service_level": 0.88,
+      "utilization": 0.95,
+      "profit": 13500,
+      "idle_time": 3.0
+    },
+    "myopic_policy": {
+      "fleet_size": 450,
+      "service_level": 0.92,
+      "utilization": 0.75,
+      "profit": 14200,
+      "idle_time": 15.0
+    },
+    "greedy_heuristic": {
+      "fleet_size": 500,
+      "service_level": 0.85,
+      "utilization": 0.70,
+      "profit": 12800,
+      "idle_time": 18.0
+    }
+  },
+  "sensitivity_analysis": {
+    "driver_probability": {
+      "0.2": {"fleet": 445, "service": 0.29, "utilization": 1.00},
+      "0.4": {"fleet": 536, "service": 0.64, "utilization": 1.00},
+      "0.6": {"fleet": 476, "service": 0.92, "utilization": 0.95},
+      "0.7": {"fleet": 376, "service": 0.97, "utilization": 0.93},
+      "0.8": {"fleet": 325, "service": 0.98, "utilization": 0.92},
+      "1.0": {"fleet": 261, "service": 0.98, "utilization": 0.94}
+    },
+    "periods": {
+      "4": {"fleet": 95, "service": 0.93, "utilization": 0.84},
+      "8": {"fleet": 188, "service": 0.97, "utilization": 0.90},
+      "16": {"fleet": 376, "service": 0.97, "utilization": 0.93},
+      "32": {"fleet": 752, "service": 0.98, "utilization": 0.95},
+      "64": {"fleet": 1504, "service": 0.98, "utilization": 0.95}
+    }
+  },
+  "chicago_dataset_results": {
+    "description": "Results using Chicago ridehailing dataset",
+    "total_fleet": 703,
+    "service_level": 0.99,
+    "utilization": 0.97,
+    "profit": 10120,
+    "empty_distance": 5.05,
+    "idle_time": 1.92
+  },
+  "algorithm_metrics": {
+    "convergence_iterations": 1000,
+    "optimization_time_seconds": 45.3,
+    "scenarios_evaluated": 100,
+    "state_space_size": 10000,
+    "action_space_size": 1000
+  }
+}
