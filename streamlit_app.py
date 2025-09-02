@@ -1297,13 +1297,14 @@ st.markdown("**Complexity per Component:**")
             st.markdown("**Overall VFA Complexity:**")
             st.latex(r"O(I \times |\Xi| \times T \times (|A_t| \times |B_t|)^{2.5})")
             
-            st.markdown("""
-            ### Solution Methods (Section 4)
-            
-            **1. Value Function Approximation (Algorithm 1):**
-            - Iterative search over fleet size space
-            - Convergence in ~1000 iterations
-            """)
+st.markdown("""
+### Solution Methods (Section 4)
+
+**1. Value Function Approximation (Algorithm 1):**
+- Iterative search over fleet size space
+- Convergence in ~1000 iterations
+""")
+
             
             st.latex(r"\text{Step size: } \rho = \frac{1}{\sqrt{N(x_p)}}")
             
@@ -1469,6 +1470,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
