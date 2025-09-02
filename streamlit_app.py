@@ -1447,20 +1447,22 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
  
 # Footer
 st.markdown("---")
-st.markdown("""
-<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; text-align: center; color: white;'>
-    <h3 style='color: white; margin-bottom: 1rem;'>Ready to Optimize Your Fleet?</h3>
-    <p style='color: white; margin-bottom: 1.5rem;'>
+st.markdown('''
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; text-align: center; color: white;">
+    <h3 style="color: white; margin-bottom: 1rem;">Ready to Optimize Your Fleet?</h3>
+    <p style="color: white; margin-bottom: 1.5rem;">
         This platform demonstrates production-ready implementation of cutting-edge optimization research.
     </p>
-    <p style='color: white;'>
+    <p style="color: white;">
         <strong>Sahil Bhatt</strong> | Applied Scientist | Machine Learning & Operations Research<br>
-        <a href='mailto:sahil.bhatt@torontomu.ca' style='color: white;'>📧 sahil.bhatt@torontomu.ca</a> | 
-        <a href='https://github.com/sahilpbhatt' style='color: white;'>🔗 GitHub</a> | 
-        <a href='https://linkedin.com/in/sahilpbhatt' style='color: white;'>💼 LinkedIn</a>
+        <a href="mailto:sahil.bhatt@torontomu.ca" style="color: white;">&#x1F4E7; sahil.bhatt@torontomu.ca</a> | 
+        <a href="https://github.com/sahilpbhatt" style="color: white;">&#x1F517; GitHub</a> | 
+        <a href="https://linkedin.com/in/sahilpbhatt" style="color: white;">&#x1F4BC; LinkedIn</a>
     </p>
 </div>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
+
+
 
 
 
