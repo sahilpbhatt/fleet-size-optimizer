@@ -1275,12 +1275,13 @@ st.markdown("""
     <p style='color: white;'>
         <strong>Sahil Bhatt</strong> | Applied Scientist | Machine Learning & Operations Research<br>
         <a href='mailto:sahil.bhatt@torontomu.ca' style='color: white;'>📧 sahil.bhatt@torontomu.ca</a> | 
-        <a href='https://github.com/sahilbhatt' style='color: white;'>🔗 GitHub</a> | 
-        <a href='https://linkedin.com/in/sahilbhatt' style='color: white;'>💼 LinkedIn</a>
+        <a href='https://github.com/sahilpbhatt' style='color: white;'>🔗 GitHub</a> | 
+        <a href='https://linkedin.com/in/sahilpbhatt' style='color: white;'>💼 LinkedIn</a>
     </p>
 </div>
 
 """, unsafe_allow_html=True)
+
 
 
 
