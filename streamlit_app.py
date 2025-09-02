@@ -1315,7 +1315,7 @@ with tab6:
     st.header("Documentation & Resources")
     
     with st.expander("📚 Research Paper", expanded=True):
-        st.markdown("""
+        st.markdown('''
 ### Fleet Size Planning in Crowdsourced Delivery: Balancing Service Level and Driver Utilization
 
 **Authors:** Aliaa Alnaggar, Sahil Bhatt  
@@ -1334,7 +1334,8 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
 2. Value Function Approximation (VFA) algorithm
 3. Handles decision-dependent uncertainty
 4. Validated on Chicago ridehailing dataset
-""")
+''')
+
 
     with st.expander("💻 API Documentation"):
         st.markdown("""
@@ -1443,6 +1444,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
