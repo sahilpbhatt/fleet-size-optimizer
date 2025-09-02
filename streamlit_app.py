@@ -1373,43 +1373,36 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
     ''')
 
 
-    
     with st.expander("🚀 Deployment Guide"):
-        st.markdown("""
-        ### Production Deployment
+        st.markdown("### Production Deployment")
         
-        **Local Development:**
-        ```bash
-        git clone https://github.com/sahilbhatt/fleet-optimizer
+        # Local Development
+        st.markdown("**Local Development:**")
+        st.code('''git clone https://github.com/sahilbhatt/fleet-optimizer
         cd fleet-optimizer
         pip install -r requirements.txt
-        streamlit run streamlit_app.py
-        ```
+        streamlit run streamlit_app.py''', language='bash')
         
-        **Docker Deployment:**
-        ```bash
-        docker build -t fleet-optimizer .
-        docker run -p 8501:8501 fleet-optimizer
-        ```
+        # Docker Deployment
+        st.markdown("**Docker Deployment:**")
+        st.code('''docker build -t fleet-optimizer .
+        docker run -p 8501:8501 fleet-optimizer''', language='bash')
         
-        **Cloud Deployment (AWS):**
-        ```bash
-        # Using AWS CDK
+        # Cloud Deployment (AWS)
+        st.markdown("**Cloud Deployment (AWS):**")
+        st.code('''# Using AWS CDK
         cdk deploy FleetOptimizerStack
         
         # Or using Terraform
-        terraform apply
-        ```
+        terraform apply''', language='bash')
         
-        **Environment Variables:**
-        ```env
-        OPTIMIZATION_TIMEOUT=60
+        # Environment Variables
+        st.markdown("**Environment Variables:**")
+        st.code('''OPTIMIZATION_TIMEOUT=60
         MAX_FLEET_SIZE=1500
         DEFAULT_PENALTY=250
-        CACHE_TTL=3600
-        ```
-        """)
-
+        CACHE_TTL=3600''', language='env')
+        
     with st.expander("📊 Data Sources"):
         # Chicago Ridehailing Dataset
         st.markdown('''
@@ -1461,6 +1454,7 @@ st.markdown('''
     </p>
 </div>
 ''', unsafe_allow_html=True)
+
 
 
 
