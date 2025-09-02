@@ -1267,54 +1267,49 @@ def value_function_approximation(data, params):
             """)
         
 with st.expander("⚡ Computational Complexity", expanded=True):
-    st.markdown(
-        """
-        ### Algorithm Complexity Analysis  
-        """
-    ) 
-            st.latex(r"\text{State Space: } \mathcal{S} = \{(R_t, D_t, K_t)\} \text{ where } |S| = O(|A_t| \times |B_t| \times |K|)")
-            
-            st.latex(r"\text{Action Space: } \mathcal{Y}_t = \{y_{tab} \in \{0,1\} : \forall a \in A_t, b \in B_t^+\}")
-            
-st.markdown("**Complexity per Component:**")
+    st.markdown("### Algorithm Complexity Analysis")
 
+    st.latex(r"\text{State Space: } \mathcal{S} = \{(R_t, D_t, K_t)\} \text{ where } |S| = O(|A_t| \times |B_t| \times |K|)")
+    st.latex(r"\text{Action Space: } \mathcal{Y}_t = \{y_{tab} \in \{0,1\} : \forall a \in A_t, b \in B_t^+\}")
 
-            
-            complexity_df = pd.DataFrame({
-                'Component': ['State Space', 'Action Space', 'VFA Iteration', 'Matching Problem', 'Boltzmann Exploration'],
-                'Complexity': ['O(|At| × |Bt| × |K|)', 'O(|At| × |Bt|)', 'O(I × |Ξ| × T)', 'O(n^2.5)', 'O(P × |X|)'],
-                'Description': [
-                    'Drivers × Orders × Performance metrics',
-                    'Binary matching decisions',
-                    'I iterations, |Ξ| scenarios, T epochs',
-                    'Gurobi MIP solver per epoch',
-                    'P periods, |X| fleet size options'
-                ]
-            })
-            
-            st.dataframe(complexity_df, hide_index=True, use_container_width=True)
-            
-            st.markdown("**Overall VFA Complexity:**")
-            st.latex(r"O(I \times |\Xi| \times T \times (|A_t| \times |B_t|)^{2.5})")
-            
+    st.markdown("**Complexity per Component:**")
 
-            st.latex(r"\text{Step size: } \rho = \frac{1}{\sqrt{N(x_p)}}")
-            
-            st.markdown("**2. Boltzmann Exploration (Algorithm 2):**")
-            st.latex(r"\text{Prob}(x_p) = \frac{e^{-V(p,x_p)/\tau}}{\sum_{x'_p \in \mathcal{X}} e^{-V(p,x'_p)/\tau}}")
-            
-            st.markdown("Where temperature:")
-            st.latex(r"\tau = \frac{10 \times d}{i}")
-            
-            st.markdown("**3. Parametric Cost Function Approximation (Section 4.3):**")
-            st.latex(r"\pi_{ab} = r(b) - c(a,b) + (1-w^s)g^{util}(l_a) + w^s g^{serv}(t, t^{max}_b)")
-            
-            st.markdown("""
-            **4. Monte Carlo Simulation:**
-            - Number of sample paths: |Ξ| = 10 (Section 5.1)
-            - Rolling horizon over T = 192 epochs
-            - Parallel evaluation of scenarios
-            """)
+    complexity_df = pd.DataFrame({
+        'Component': ['State Space', 'Action Space', 'VFA Iteration', 'Matching Problem', 'Boltzmann Exploration'],
+        'Complexity': ['O(|At| × |Bt| × |K|)', 'O(|At| × |Bt|)', 'O(I × |Ξ| × T)', 'O(n^2.5)', 'O(P × |X|)'],
+        'Description': [
+            'Drivers × Orders × Performance metrics',
+            'Binary matching decisions',
+            'I iterations, |Ξ| scenarios, T epochs',
+            'Gurobi MIP solver per epoch',
+            'P periods, |X| fleet size options'
+        ]
+    })
+
+    st.dataframe(complexity_df, hide_index=True, use_container_width=True)
+
+    st.markdown("**Overall VFA Complexity:**")
+    st.latex(r"O(I \times |\Xi| \times T \times (|A_t| \times |B_t|)^{2.5})")
+
+    st.markdown("### Solution Methods (Section 4)")
+
+    st.markdown("**1. Value Function Approximation (Algorithm 1):**")
+    st.markdown("- Iterative search over fleet size space")
+    st.markdown("- Convergence in ~1000 iterations")
+    st.latex(r"\text{Step size: } \rho = \frac{1}{\sqrt{N(x_p)}}")
+
+    st.markdown("**2. Boltzmann Exploration (Algorithm 2):**")
+    st.latex(r"\text{Prob}(x_p) = \frac{e^{-V(p,x_p)/\tau}}{\sum_{x'_p \in \mathcal{X}} e^{-V(p,x'_p)/\tau}}")
+    st.markdown("Where temperature:")
+    st.latex(r"\tau = \frac{10 \times d}{i}")
+
+    st.markdown("**3. Parametric Cost Function Approximation (Section 4.3):**")
+    st.latex(r"\pi_{ab} = r(b) - c(a,b) + (1-w^s)g^{util}(l_a) + w^s g^{serv}(t, t^{max}_b)")
+
+    st.markdown("**4. Monte Carlo Simulation:**")
+    st.markdown("- Number of sample paths: |Ξ| = 10 (Section 5.1)")
+    st.markdown("- Rolling horizon over T = 192 epochs")
+    st.markdown("- Parallel evaluation of scenarios")
 
 with tab6:
     st.header("Documentation & Resources")
@@ -1462,6 +1457,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
