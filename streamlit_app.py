@@ -291,16 +291,16 @@ with col1:
 with col2:
     st.markdown("**[📧 Email](mailto:sahil.bhatt@torontomu.ca)**")
 with col3:
-    st.markdown("**[💼 LinkedIn](https://linkedin.com/in/sahilbhatt)**")
+    st.markdown("**[💼 LinkedIn](https://linkedin.com/in/sahilpbhatt)**")
 with col4:
-    st.markdown("**[🔗 GitHub](https://github.com/sahilbhatt)**")
+    st.markdown("**[🔗 GitHub](https://github.com/sahilpbhatt)**")
 
 st.markdown("---")
 
 # Sidebar configuration
-with st.sidebar:
-    st.image("https://via.placeholder.com/300x100/667eea/ffffff?text=Fleet+Optimizer", use_column_width=True)
-    
+with st.sidebar: 
+    st.image("https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/assets/logo.png", use_column_width=True)
+
     st.header("⚙️ Optimization Parameters")
     
     with st.expander("ℹ️ About This Platform", expanded=True):
@@ -1279,4 +1279,5 @@ st.markdown("""
         <a href='https://linkedin.com/in/sahilbhatt' style='color: white;'>💼 LinkedIn</a>
     </p>
 </div>
+
 """, unsafe_allow_html=True)
