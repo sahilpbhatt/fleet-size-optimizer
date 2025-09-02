@@ -1338,27 +1338,40 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
 
 
     with st.expander("💻 API Documentation"):
-        st.markdown("""
-### REST API Endpoints
+        st.markdown('''
+    ### REST API Endpoints
+    
+        # Optimization endpoint
+        POST /api/optimize
+        {
+            "w_s": 0.5,
+            "periods": 16,
+            "hours_per_period": 1.0,
+            "prob_enter": 0.7,
+            "penalty_type": "linear"
+        }
+    
+        # Response
+        {
+            "fleet_sizes": [20, 22, 28, ...],
+            "service_level": 0.97,
+            "utilization": 0.93,
+            "platform_profit": 14050
+        }
+    
+    ### Python Client Example
+    
+        import requests
+    
+        response = requests.post(
+            "https://api.fleet-optimizer.com/optimize",
+            json={"w_s": 0.5, "periods": 16}
+        )
+    
+        results = response.json()
+        print(f"Optimal fleet: {results['fleet_sizes']}")
+    ''')
 
-```python
-# Optimization endpoint
-POST /api/optimize
-{
-    "w_s": 0.5,
-    "periods": 16,
-    "hours_per_period": 1.0,
-    "prob_enter": 0.7,
-    "penalty_type": "linear"
-}
-
-# Response
-{
-    "fleet_sizes": [20, 22, 28, ...],
-    "service_level": 0.97,
-    "utilization": 0.93,
-    "platform_profit": 14050
-}
 
     
     with st.expander("🚀 Deployment Guide"):
@@ -1444,6 +1457,7 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
