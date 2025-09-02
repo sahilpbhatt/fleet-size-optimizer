@@ -192,8 +192,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Sahil Bhatt**
 - Email: sahil.bhatt@torontomu.ca
-- LinkedIn: [linkedin.com/in/sahilbhatt](https://linkedin.com/in/sahilbhatt)
-- GitHub: [@sahilbhatt](https://github.com/sahilbhatt)
+- LinkedIn: [linkedin.com/in/sahilpbhatt](https://linkedin.com/in/sahilpbhatt)
+- GitHub: [@sahilpbhatt](https://github.com/sahilpbhatt)
 
 ## 🙏 Acknowledgments
 
