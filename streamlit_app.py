@@ -387,7 +387,7 @@ st.markdown("---")
 with st.sidebar:
     # Try to load image from GitHub, fallback to styled div if fails
     try:
-        st.image("https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg", use_column_width=True)
+        st.image("https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg", use_container_width=True)
     except:
         # Fallback styled logo
         st.markdown("""
@@ -566,10 +566,12 @@ with tab1:
                 use_container_width=True
             )
     
-    with col3:
+    # Reset button - moved to column 1 to avoid duplicate column reference
+    col1_reset, col2_reset, col3_reset = st.columns(3)
+    with col3_reset:
         if st.button("🔄 Reset", use_container_width=True):
             st.session_state.clear()
-            st.experimental_rerun()
+            st.rerun()
     
     if 'results' in st.session_state:
         results = st.session_state.results
@@ -649,45 +651,6 @@ with tab1:
                 marker_color='rgba(102, 126, 234, 0.8)',
                 text=fleet_df['Fleet Size'],
                 textposition='outside',
-                hovertemplate='Period: %{x}<br>Fleet: %{y}<br>Time: %{customdata}',
-                customdata=fleet_df['Time']
-            ),
-            row=1, col=1, secondary_y=False
-        )
-        
-        fig.add_trace(
-            go.Scatter(
-                x=fleet_df['Period'],
-                y=fleet_df['Expected Demand'],
-                name='Expected Demand',
-                line=dict(color='rgba(239, 68, 68, 0.8)', width=3, dash='dash'),
-                mode='lines+markers',
-                marker=dict(size=8),
-                hovertemplate='Period: %{x}<br>Demand: %{y}'
-            ),
-            row=1, col=1, secondary_y=True
-        )
-        
-        # Performance metrics
-        fig.add_trace(
-            go.Scatter(
-                x=fleet_df['Period'],
-                y=results['service_levels'],
-                name='Service Level',
-                line=dict(color='#10B981', width=2),
-                mode='lines+markers',
-                hovertemplate='Period: %{x}<br>Service Level: %{y:.1%}'
-            ),
-            row=2, col=1, secondary_y=False
-        )
-        
-        fig.add_trace(
-            go.Scatter(
-                x=fleet_df['Period'],
-                y=results['utilization_levels'],
-                name='Driver Utilization',
-                line=dict(color='#3B82F6', width=2),
-                mode='lines+markers',
                 hovertemplate='Period: %{x}<br>Utilization: %{y:.1%}'
             ),
             row=2, col=1, secondary_y=False
@@ -1202,7 +1165,74 @@ with tab5:
             st.latex(r"J_t(S_t) = \max_{y_t \in \mathcal{Y}_t} \left\{ C_t(S_t, y_t) + \gamma \sum_{S_{t+1}} P(S_{t+1}|S_t, y_t, x) J_{t+1}(S_{t+1}) \right\}")
         
         with st.expander("🔬 Value Function Approximation"):
-            st.code("""
+            st.code("""docker build -t fleet-optimizer .
+docker run -p 8501:8501 fleet-optimizer""", language='bash')
+        
+        # Cloud Deployment (AWS)
+        st.markdown("**Cloud Deployment (AWS):**")
+        st.code("""# Using AWS CDK
+cdk deploy FleetOptimizerStack
+
+# Or using Terraform
+terraform apply""", language='bash')
+        
+        # Environment Variables
+        st.markdown("**Environment Variables:**")
+        st.code("""OPTIMIZATION_TIMEOUT=60
+MAX_FLEET_SIZE=1500
+DEFAULT_PENALTY=250
+CACHE_TTL=3600""", language='env')
+        
+    with st.expander("📊 Data Sources"):
+        # Chicago Ridehailing Dataset
+        st.markdown("""
+        ### Chicago Ridehailing Dataset
+        
+        **Source:** Chicago Data Portal  
+        **Period:** 2018-2022  
+        **Records:** 100M+ trips  
+        **Features:** Origin, destination, time, duration
+        """)
+        
+        # Synthetic Dataset
+        st.markdown("""
+        ### Synthetic Dataset
+        
+        **Generation Process:**
+        - Poisson demand arrival (λ=10)
+        - Binomial driver arrival
+        - Grid network (10×10)
+        - 90-minute delivery windows
+        """)
+        
+        # Preprocessing Code
+        st.markdown("### Preprocessing")
+        st.code("""# Load and filter Chicago data
+df = pd.read_csv('chicago_trips.csv')
+df_filtered = df[df['community_area'].isin([8, 32, 33])]
+
+# Aggregate to 5-minute intervals
+df_agg = df_filtered.resample('5T').agg({
+    'trip_id': 'count',
+    'trip_miles': 'mean'
+})""", language='python')
+
+# Footer
+st.markdown("---")
+st.markdown("""
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; text-align: center; color: white;">
+    <h3 style="color: white; margin-bottom: 1rem;">Ready to Optimize Your Fleet?</h3>
+    <p style="color: white; margin-bottom: 1.5rem;">
+        This platform demonstrates production-ready implementation of cutting-edge optimization research.
+    </p>
+    <p style="color: white;">
+        <strong>Sahil Bhatt</strong> | Applied Scientist | Machine Learning & Operations Research<br>
+        <a href="mailto:sahil.bhatt@torontomu.ca" style="color: white;">📧 sahil.bhatt@torontomu.ca</a> | 
+        <a href="https://github.com/sahilpbhatt" style="color: white;">🔗 GitHub</a> | 
+        <a href="https://linkedin.com/in/sahilpbhatt" style="color: white;">💼 LinkedIn</a>
+    </p>
+</div>
+""", unsafe_allow_html=True)"""
 def value_function_approximation(data, params):
     V = initialize_value_function()
     x_best = None
@@ -1264,58 +1294,57 @@ def value_function_approximation(data, params):
             """)
             st.latex(r"L(x) = A^{util}_T = \frac{1}{|A^{total}_T|} \sum_{a \in A^{exit}} l_a")
             st.latex(r"Q(x) = \frac{B^{matched}_T}{B^{total}_T}")
-            """)
-        
-with st.expander("⚡ Computational Complexity", expanded=True):
-    st.markdown("### Algorithm Complexity Analysis")
+            
+        with st.expander("⚡ Computational Complexity", expanded=True):
+            st.markdown("### Algorithm Complexity Analysis")
 
-    st.latex(r"\text{State Space: } \mathcal{S} = \{(R_t, D_t, K_t)\} \text{ where } |S| = O(|A_t| \times |B_t| \times |K|)")
-    st.latex(r"\text{Action Space: } \mathcal{Y}_t = \{y_{tab} \in \{0,1\} : \forall a \in A_t, b \in B_t^+\}")
+            st.latex(r"\text{State Space: } \mathcal{S} = \{(R_t, D_t, K_t)\} \text{ where } |S| = O(|A_t| \times |B_t| \times |K|)")
+            st.latex(r"\text{Action Space: } \mathcal{Y}_t = \{y_{tab} \in \{0,1\} : \forall a \in A_t, b \in B_t^+\}")
 
-    st.markdown("**Complexity per Component:**")
+            st.markdown("**Complexity per Component:**")
 
-    complexity_df = pd.DataFrame({
-        'Component': ['State Space', 'Action Space', 'VFA Iteration', 'Matching Problem', 'Boltzmann Exploration'],
-        'Complexity': ['O(|At| × |Bt| × |K|)', 'O(|At| × |Bt|)', 'O(I × |Ξ| × T)', 'O(n^2.5)', 'O(P × |X|)'],
-        'Description': [
-            'Drivers × Orders × Performance metrics',
-            'Binary matching decisions',
-            'I iterations, |Ξ| scenarios, T epochs',
-            'Gurobi MIP solver per epoch',
-            'P periods, |X| fleet size options'
-        ]
-    })
+            complexity_df = pd.DataFrame({
+                'Component': ['State Space', 'Action Space', 'VFA Iteration', 'Matching Problem', 'Boltzmann Exploration'],
+                'Complexity': ['O(|At| × |Bt| × |K|)', 'O(|At| × |Bt|)', 'O(I × |Ξ| × T)', 'O(n^2.5)', 'O(P × |X|)'],
+                'Description': [
+                    'Drivers × Orders × Performance metrics',
+                    'Binary matching decisions',
+                    'I iterations, |Ξ| scenarios, T epochs',
+                    'Gurobi MIP solver per epoch',
+                    'P periods, |X| fleet size options'
+                ]
+            })
 
-    st.dataframe(complexity_df, hide_index=True, use_container_width=True)
+            st.dataframe(complexity_df, hide_index=True, use_container_width=True)
 
-    st.markdown("**Overall VFA Complexity:**")
-    st.latex(r"O(I \times |\Xi| \times T \times (|A_t| \times |B_t|)^{2.5})")
+            st.markdown("**Overall VFA Complexity:**")
+            st.latex(r"O(I \times |\Xi| \times T \times (|A_t| \times |B_t|)^{2.5})")
 
-    st.markdown("### Solution Methods (Section 4)")
+            st.markdown("### Solution Methods (Section 4)")
 
-    st.markdown("**1. Value Function Approximation (Algorithm 1):**")
-    st.markdown("- Iterative search over fleet size space")
-    st.markdown("- Convergence in ~1000 iterations")
-    st.latex(r"\text{Step size: } \rho = \frac{1}{\sqrt{N(x_p)}}")
+            st.markdown("**1. Value Function Approximation (Algorithm 1):**")
+            st.markdown("- Iterative search over fleet size space")
+            st.markdown("- Convergence in ~1000 iterations")
+            st.latex(r"\text{Step size: } \rho = \frac{1}{\sqrt{N(x_p)}}")
 
-    st.markdown("**2. Boltzmann Exploration (Algorithm 2):**")
-    st.latex(r"\text{Prob}(x_p) = \frac{e^{-V(p,x_p)/\tau}}{\sum_{x'_p \in \mathcal{X}} e^{-V(p,x'_p)/\tau}}")
-    st.markdown("Where temperature:")
-    st.latex(r"\tau = \frac{10 \times d}{i}")
+            st.markdown("**2. Boltzmann Exploration (Algorithm 2):**")
+            st.latex(r"\text{Prob}(x_p) = \frac{e^{-V(p,x_p)/\tau}}{\sum_{x'_p \in \mathcal{X}} e^{-V(p,x'_p)/\tau}}")
+            st.markdown("Where temperature:")
+            st.latex(r"\tau = \frac{10 \times d}{i}")
 
-    st.markdown("**3. Parametric Cost Function Approximation (Section 4.3):**")
-    st.latex(r"\pi_{ab} = r(b) - c(a,b) + (1-w^s)g^{util}(l_a) + w^s g^{serv}(t, t^{max}_b)")
+            st.markdown("**3. Parametric Cost Function Approximation (Section 4.3):**")
+            st.latex(r"\pi_{ab} = r(b) - c(a,b) + (1-w^s)g^{util}(l_a) + w^s g^{serv}(t, t^{max}_b)")
 
-    st.markdown("**4. Monte Carlo Simulation:**")
-    st.markdown("- Number of sample paths: |Ξ| = 10 (Section 5.1)")
-    st.markdown("- Rolling horizon over T = 192 epochs")
-    st.markdown("- Parallel evaluation of scenarios")
+            st.markdown("**4. Monte Carlo Simulation:**")
+            st.markdown("- Number of sample paths: |Ξ| = 10 (Section 5.1)")
+            st.markdown("- Rolling horizon over T = 192 epochs")
+            st.markdown("- Parallel evaluation of scenarios")
 
 with tab6:
     st.header("Documentation & Resources")
     
     with st.expander("📚 Research Paper", expanded=True):
-        st.markdown('''
+        st.markdown("""
 ### Fleet Size Planning in Crowdsourced Delivery: Balancing Service Level and Driver Utilization
 
 **Authors:** Aliaa Alnaggar, Sahil Bhatt  
@@ -1334,141 +1363,94 @@ stage captures the operational dynamics through a Markov Decision Process (MDP).
 2. Value Function Approximation (VFA) algorithm
 3. Handles decision-dependent uncertainty
 4. Validated on Chicago ridehailing dataset
-''')
-
+""")
 
     with st.expander("💻 API Documentation"):
-        st.markdown('''
-    ### REST API Endpoints
-    
-        # Optimization endpoint
-        POST /api/optimize
-        {
-            "w_s": 0.5,
-            "periods": 16,
-            "hours_per_period": 1.0,
-            "prob_enter": 0.7,
-            "penalty_type": "linear"
-        }
-    
-        # Response
-        {
-            "fleet_sizes": [20, 22, 28, ...],
-            "service_level": 0.97,
-            "utilization": 0.93,
-            "platform_profit": 14050
-        }
-    
-    ### Python Client Example
-    
-        import requests
-    
-        response = requests.post(
-            "https://api.fleet-optimizer.com/optimize",
-            json={"w_s": 0.5, "periods": 16}
-        )
-    
-        results = response.json()
-        print(f"Optimal fleet: {results['fleet_sizes']}")
-    ''')
+        st.markdown("""
+### REST API Endpoints
 
+# Optimization endpoint
+POST /api/optimize
+{
+    "w_s": 0.5,
+    "periods": 16,
+    "hours_per_period": 1.0,
+    "prob_enter": 0.7,
+    "penalty_type": "linear"
+}
+
+# Response
+{
+    "fleet_sizes": [20, 22, 28, ...],
+    "service_level": 0.97,
+    "utilization": 0.93,
+    "platform_profit": 14050
+}
+
+### Python Client Example
+
+```python
+import requests
+
+response = requests.post(
+    "https://api.fleet-optimizer.com/optimize",
+    json={"w_s": 0.5, "periods": 16}
+)
+
+results = response.json()
+print(f"Optimal fleet: {results['fleet_sizes']}")
+```
+""")
 
     with st.expander("🚀 Deployment Guide"):
         st.markdown("### Production Deployment")
         
         # Local Development
         st.markdown("**Local Development:**")
-        st.code('''git clone https://github.com/sahilbhatt/fleet-optimizer
-        cd fleet-optimizer
-        pip install -r requirements.txt
-        streamlit run streamlit_app.py''', language='bash')
+        st.code("""git clone https://github.com/sahilbhatt/fleet-optimizer
+cd fleet-optimizer
+pip install -r requirements.txt
+streamlit run streamlit_app.py""", language='bash')
         
         # Docker Deployment
         st.markdown("**Docker Deployment:**")
-        st.code('''docker build -t fleet-optimizer .
-        docker run -p 8501:8501 fleet-optimizer''', language='bash')
+        st.code(>Fleet: %{y}<br>Time: %{customdata}',
+                customdata=fleet_df['Time']
+            ),
+            row=1, col=1, secondary_y=False
+        )
         
-        # Cloud Deployment (AWS)
-        st.markdown("**Cloud Deployment (AWS):**")
-        st.code('''# Using AWS CDK
-        cdk deploy FleetOptimizerStack
+        fig.add_trace(
+            go.Scatter(
+                x=fleet_df['Period'],
+                y=fleet_df['Expected Demand'],
+                name='Expected Demand',
+                line=dict(color='rgba(239, 68, 68, 0.8)', width=3, dash='dash'),
+                mode='lines+markers',
+                marker=dict(size=8),
+                hovertemplate='Period: %{x}<br>Demand: %{y}'
+            ),
+            row=1, col=1, secondary_y=True
+        )
         
-        # Or using Terraform
-        terraform apply''', language='bash')
+        # Performance metrics
+        fig.add_trace(
+            go.Scatter(
+                x=fleet_df['Period'],
+                y=results['service_levels'],
+                name='Service Level',
+                line=dict(color='#10B981', width=2),
+                mode='lines+markers',
+                hovertemplate='Period: %{x}<br>Service Level: %{y:.1%}'
+            ),
+            row=2, col=1, secondary_y=False
+        )
         
-        # Environment Variables
-        st.markdown("**Environment Variables:**")
-        st.code('''OPTIMIZATION_TIMEOUT=60
-        MAX_FLEET_SIZE=1500
-        DEFAULT_PENALTY=250
-        CACHE_TTL=3600''', language='env')
-        
-    with st.expander("📊 Data Sources"):
-        # Chicago Ridehailing Dataset
-        st.markdown('''
-        ### Chicago Ridehailing Dataset
-        
-        **Source:** Chicago Data Portal  
-        **Period:** 2018-2022  
-        **Records:** 100M+ trips  
-        **Features:** Origin, destination, time, duration
-        ''')
-        
-            # Synthetic Dataset
-            st.markdown('''
-        ### Synthetic Dataset
-        
-        **Generation Process:**
-        - Poisson demand arrival (λ=10)
-        - Binomial driver arrival
-        - Grid network (10×10)
-        - 90-minute delivery windows
-        ''')
-        
-            # Preprocessing Code
-            st.markdown('### Preprocessing')
-            st.code('''# Load and filter Chicago data
-        df = pd.read_csv('chicago_trips.csv')
-        df_filtered = df[df['community_area'].isin([8, 32, 33])]
-        
-        # Aggregate to 5-minute intervals
-        df_agg = df_filtered.resample('5T').agg({
-            'trip_id': 'count',
-            'trip_miles': 'mean'
-        })
-        ''', language='python')
- 
-# Footer
-st.markdown("---")
-st.markdown('''
-<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; text-align: center; color: white;">
-    <h3 style="color: white; margin-bottom: 1rem;">Ready to Optimize Your Fleet?</h3>
-    <p style="color: white; margin-bottom: 1.5rem;">
-        This platform demonstrates production-ready implementation of cutting-edge optimization research.
-    </p>
-    <p style="color: white;">
-        <strong>Sahil Bhatt</strong> | Applied Scientist | Machine Learning & Operations Research<br>
-        <a href="mailto:sahil.bhatt@torontomu.ca" style="color: white;">&#x1F4E7; sahil.bhatt@torontomu.ca</a> | 
-        <a href="https://github.com/sahilpbhatt" style="color: white;">&#x1F517; GitHub</a> | 
-        <a href="https://linkedin.com/in/sahilpbhatt" style="color: white;">&#x1F4BC; LinkedIn</a>
-    </p>
-</div>
-''', unsafe_allow_html=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        fig.add_trace(
+            go.Scatter(
+                x=fleet_df['Period'],
+                y=results['utilization_levels'],
+                name='Driver Utilization',
+                line=dict(color='#3B82F6', width=2),
+                mode='lines+markers',
+                hovertemplate='Period: %{x}<br
