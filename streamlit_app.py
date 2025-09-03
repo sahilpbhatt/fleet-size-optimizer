@@ -402,7 +402,7 @@ with tab1:
                 st.success("✅ Optimization completed successfully!")
                 st.balloons()
      
-    with col3:
+    with col2:
         if st.button("🔄 Reset", use_container_width=True):
             st.session_state.clear()
             st.experimental_rerun()
