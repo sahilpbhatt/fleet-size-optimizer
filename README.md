@@ -9,7 +9,7 @@
 
 A cloud-deployed platform that determines optimal fleet sizes for crowdsourced delivery services, balancing service level objectives with driver utilization targets using advanced optimization techniques.
 
-### 🚀 [Live Demo](https://fleet-optimizer.streamlit.app)
+### 🚀 [Live Demo]([https://fleet-optimizer.streamlit.app](https://fleet-size-optimizer-fvoej2nvaszyu2uepjqshr.streamlit.app/))
 
 ## 📊 Key Results
 
