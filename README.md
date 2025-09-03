@@ -47,8 +47,8 @@ streamlit run streamlit_app.py
 
 ### Option 3: Docker
 ```bash
-docker pull sahilbhatt/fleet-optimizer
-docker run -p 8501:8501 sahilbhatt/fleet-optimizer
+docker pull sahilpbhatt/fleet-size-optimizer
+docker run -p 8501:8501 sahilpbhatt/fleet-size-optimizer
 ```
 
 ## 🏗️ Architecture
