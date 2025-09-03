@@ -10,11 +10,6 @@ from datetime import datetime, timedelta
 import base64
 from typing import Dict, List, Tuple
 import io
-from reportlab.lib.pagesizes import letter
-from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import inch
 
 # Page configuration - Professional setup
 st.set_page_config(
@@ -247,102 +242,143 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
         return [0.35, 0.30, 0.20, 0.10, 0.05]  # Low utilization scenario
 
 def generate_pdf_report(results: Dict) -> bytes:
-    """Generate professional PDF report of optimization results using ReportLab"""
-    buffer = io.BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=72)
+    """Generate PDF report using HTML and CSS that will be converted to PDF by the browser"""
+    # Create HTML content
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fleet Optimization Report</title>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                color: #333;
+            }}
+            h1 {{
+                color: #667eea;
+                text-align: center;
+                font-size: 24px;
+                margin-bottom: 5px;
+            }}
+            h2 {{
+                color: #764ba2;
+                font-size: 20px;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }}
+            .subtitle {{
+                text-align: center;
+                color: #666;
+                margin-bottom: 30px;
+            }}
+            .section {{
+                margin-bottom: 25px;
+                border-left: 4px solid #667eea;
+                padding-left: 15px;
+            }}
+            table {{
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }}
+            table, th, td {{
+                border: 1px solid #ddd;
+            }}
+            th {{
+                background-color: #667eea;
+                color: white;
+                text-align: left;
+                padding: 10px;
+            }}
+            td {{
+                padding: 8px;
+            }}
+            tr:nth-child(even) {{
+                background-color: #f2f2f2;
+            }}
+            .footer {{
+                margin-top: 30px;
+                text-align: center;
+                font-size: 12px;
+                color: #666;
+            }}
+        </style>
+    </head>
+    <body>
+        <h1>FLEET SIZE OPTIMIZATION REPORT</h1>
+        <p class="subtitle">Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}</p>
+        
+        <div class="section">
+            <h2>EXECUTIVE SUMMARY</h2>
+            <p>Total Fleet Size: <strong>{results['total_fleet']}</strong> drivers</p>
+            <p>Service Level Achieved: <strong>{results['service_level']:.1%}</strong></p>
+            <p>Driver Utilization: <strong>{results['utilization']:.1%}</strong></p>
+            <p>Daily Platform Profit: <strong>${results['platform_profit']:,.0f}</strong></p>
+        </div>
+        
+        <div class="section">
+            <h2>KEY FINDINGS</h2>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Fleet reduction vs baseline</td>
+                    <td>{(1078 - results['total_fleet'])/1078:.1%}</td>
+                </tr>
+                <tr>
+                    <td>Drivers meeting utilization target</td>
+                    <td>{results['drivers_meeting_target']:.0%}</td>
+                </tr>
+                <tr>
+                    <td>Average idle time</td>
+                    <td>{results['idle_time']:.1f} minutes</td>
+                </tr>
+                <tr>
+                    <td>Empty travel distance</td>
+                    <td>{results['empty_distance']:.2f} km</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>OPTIMIZATION METRICS</h2>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Convergence Iterations</td>
+                    <td>{results['convergence_iterations']}</td>
+                </tr>
+                <tr>
+                    <td>Scenarios Evaluated</td>
+                    <td>{results['scenarios_evaluated']}</td>
+                </tr>
+                <tr>
+                    <td>Computation Time</td>
+                    <td>{results['optimization_time']:.1f} seconds</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="footer">
+            <p>Based on research: "Fleet Size Planning in Crowdsourced Delivery"</p>
+            <p>Authors: Sahil Bhatt, Aliaa Alnaggar</p>
+        </div>
+    </body>
+    </html>
+    """
     
-    # Define styles
-    styles = getSampleStyleSheet()
-    title_style = styles["Heading1"]
-    title_style.alignment = 1  # Center alignment
-    subtitle_style = styles["Heading2"]
-    subtitle_style.alignment = 1
-    normal_style = styles["Normal"]
-    heading_style = styles["Heading3"]
-    
-    # Custom styles
-    section_title = ParagraphStyle(
-        'SectionTitle',
-        parent=styles['Heading2'],
-        textColor=colors.HexColor("#667eea"),
-        spaceAfter=10
-    )
-    
-    # Content elements
-    elements = []
-    
-    # Title
-    elements.append(Paragraph("FLEET SIZE OPTIMIZATION REPORT", title_style))
-    elements.append(Paragraph(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}", subtitle_style))
-    elements.append(Spacer(1, 20))
-    
-    # Executive Summary
-    elements.append(Paragraph("EXECUTIVE SUMMARY", section_title))
-    elements.append(Paragraph(f"Total Fleet Size: {results['total_fleet']} drivers", normal_style))
-    elements.append(Paragraph(f"Service Level Achieved: {results['service_level']:.1%}", normal_style))
-    elements.append(Paragraph(f"Driver Utilization: {results['utilization']:.1%}", normal_style))
-    elements.append(Paragraph(f"Daily Platform Profit: ${results['platform_profit']:,.0f}", normal_style))
-    elements.append(Spacer(1, 15))
-    
-    # Key Findings
-    elements.append(Paragraph("KEY FINDINGS", section_title))
-    
-    data = [
-        ["Metric", "Value"],
-        ["Fleet reduction vs baseline", f"{(1078 - results['total_fleet'])/1078:.1%}"],
-        ["Drivers meeting utilization target", f"{results['drivers_meeting_target']:.0%}"],
-        ["Average idle time", f"{results['idle_time']:.1f} minutes"],
-        ["Empty travel distance", f"{results['empty_distance']:.2f} km"]
-    ]
-    
-    t = Table(data, colWidths=[2.5*inch, 2*inch])
-    t.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (1, 0), colors.HexColor("#667eea")),
-        ('TEXTCOLOR', (0, 0), (1, 0), colors.white),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black),
-    ]))
-    
-    elements.append(t)
-    elements.append(Spacer(1, 15))
-    
-    # Optimization Metrics
-    elements.append(Paragraph("OPTIMIZATION METRICS", section_title))
-    
-    data = [
-        ["Metric", "Value"],
-        ["Convergence Iterations", f"{results['convergence_iterations']}"],
-        ["Scenarios Evaluated", f"{results['scenarios_evaluated']}"],
-        ["Computation Time", f"{results['optimization_time']:.1f} seconds"]
-    ]
-    
-    t2 = Table(data, colWidths=[2.5*inch, 2*inch])
-    t2.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (1, 0), colors.HexColor("#667eea")),
-        ('TEXTCOLOR', (0, 0), (1, 0), colors.white),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black),
-    ]))
-    
-    elements.append(t2)
-    elements.append(Spacer(1, 15))
-    
-    # Footer
-    elements.append(Paragraph("Based on research: \"Fleet Size Planning in Crowdsourced Delivery\"", normal_style))
-    elements.append(Paragraph("Authors: Sahil Bhatt, Aliaa Alnaggar", normal_style))
-    
-    # Build PDF
-    doc.build(elements)
-    
-    # Get PDF from buffer
-    buffer.seek(0)
-    return buffer.getvalue()
+    # Convert HTML to PDF-like format (actually just HTML that will render as PDF)
+    return html_content.encode('utf-8')
 
 # Header section
 st.markdown('<h1 class="main-header">Fleet Size Optimization Platform</h1>', unsafe_allow_html=True)
@@ -500,10 +536,13 @@ with tab1:
     with col2:
         if st.button("📥 Download Report", use_container_width=True):
             if 'results' in st.session_state:
-                pdf = generate_pdf_report(st.session_state.results)
-                b64 = base64.b64encode(pdf).decode()
-                href = f'<a href="data:application/pdf;base64,{b64}" download="fleet_optimization_report.pdf">Download PDF Report</a>'
+                # Generate an HTML report that will download as a PDF
+                html_content = generate_pdf_report(st.session_state.results)
+                b64 = base64.b64encode(html_content).decode()
+                download_filename = f"fleet_optimization_report_{datetime.now().strftime('%Y%m%d_%H%M')}.html"
+                href = f'<a href="data:text/html;base64,{b64}" download="{download_filename}">Download HTML Report</a>'
                 st.markdown(href, unsafe_allow_html=True)
+                st.info("Note: To convert to PDF, open the HTML file in a browser and use 'Print' > 'Save as PDF'")
     
     with col3:
         if st.button("🔄 Reset", use_container_width=True):
@@ -652,8 +691,6 @@ with tab1:
         )
         
         st.plotly_chart(fig, use_container_width=True)
-
-# Rest of the UI tabs left as-is for brevity, since the issue was with the PDF generation function
 
 # Footer
 st.markdown("---")
