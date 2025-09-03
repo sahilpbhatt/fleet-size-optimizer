@@ -31,263 +31,89 @@ st.set_page_config(
     }
 )
 
-# Professional CSS styling - Corporate Grade Design
+# Professional CSS styling based on research paper aesthetics
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
     
     * {
         font-family: 'Inter', sans-serif;
     }
     
     .main-header {
-        font-size: 3.2rem;
-        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #06b6d4 50%, #10b981 75%, #f59e0b 100%);
+        font-size: 2.8rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-weight: 800;
+        font-weight: 700;
         text-align: center;
-        margin-bottom: 0.8rem;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
     }
     
     .sub-header {
-        font-size: 1.3rem;
-        color: #475569;
+        font-size: 1.1rem;
+        color: #64748B;
         text-align: center;
-        margin-bottom: 2.5rem;
-        font-weight: 500;
-        line-height: 1.4;
-    }
-    
-    .professional-badge {
-        display: inline-block;
-        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin: 0.2rem;
-        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-        transition: all 0.3s ease;
-    }
-    
-    .professional-badge:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        margin-bottom: 2rem;
+        font-weight: 400;
     }
     
     .metric-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-        padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 25px rgba(0,0,0,0.08);
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .metric-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #3b82f6, #06b6d4, #10b981);
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        border-left: 4px solid #667eea;
+        transition: all 0.3s;
     }
     
     .metric-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.12), 0 20px 40px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12);
+        transform: translateY(-2px);
     }
     
     .stButton>button {
-        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         font-weight: 600;
         border: none;
-        padding: 0.875rem 2.5rem;
-        border-radius: 12px;
-        font-size: 1.1rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .stButton>button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-        transition: left 0.5s;
-    }
-    
-    .stButton>button:hover::before {
-        left: 100%;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
     
     .stButton>button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
     }
     
     div[data-testid="metric-container"] {
-        background: linear-gradient(145deg, #f8fafc 0%, #ffffff 100%);
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        transition: all 0.3s ease;
-    }
-    
-    div[data-testid="metric-container"]:hover {
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        transform: translateY(-2px);
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     
     .stTabs [data-baseweb="tab-list"] {
-        gap: 12px;
-        background: #f8fafc;
-        padding: 8px;
-        border-radius: 12px;
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        gap: 8px;
     }
     
     .stTabs [data-baseweb="tab"] {
-        height: 55px;
-        padding-left: 24px;
-        padding-right: 24px;
-        background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
-        border-radius: 10px;
+        height: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px 8px 0 0;
         font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(226, 232, 240, 0.5);
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        background-color: #667eea;
         color: white;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        transform: translateY(-2px);
-    }
-    
-    .stTabs [data-baseweb="tab"]:hover:not([aria-selected="true"]) {
-        background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
-        transform: translateY(-1px);
-    }
-    
-    .portfolio-section {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        padding: 3rem 2rem;
-        border-radius: 20px;
-        color: white;
-        margin: 2rem 0;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .skill-tag {
-        display: inline-block;
-        background: rgba(59, 130, 246, 0.1);
-        color: #3b82f6;
-        padding: 0.4rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        margin: 0.2rem;
-        border: 1px solid rgba(59, 130, 246, 0.2);
-        transition: all 0.3s ease;
-    }
-    
-    .skill-tag:hover {
-        background: rgba(59, 130, 246, 0.2);
-        transform: translateY(-1px);
-    }
-    
-    .achievement-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-        padding: 1.5rem;
-        border-radius: 12px;
-        border-left: 4px solid #10b981;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        margin: 1rem 0;
-        transition: all 0.3s ease;
-    }
-    
-    .achievement-card:hover {
-        transform: translateX(4px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    
-    .code-block {
-        background: #1e293b;
-        color: #e2e8f0;
-        padding: 1.5rem;
-        border-radius: 12px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        border: 1px solid #334155;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    
-    .highlight-box {
-        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-        border: 1px solid #93c5fd;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1rem 0;
-    }
-    
-    .footer-section {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        padding: 3rem 2rem;
-        border-radius: 20px;
-        color: white;
-        text-align: center;
-        margin-top: 3rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .social-link {
-        display: inline-block;
-        color: #94a3b8;
-        text-decoration: none;
-        margin: 0 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(148, 163, 184, 0.2);
-    }
-    
-    .social-link:hover {
-        color: #3b82f6;
-        background: rgba(59, 130, 246, 0.1);
-        border-color: #3b82f6;
-        transform: translateY(-2px);
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-        .main-header {
-            font-size: 2.2rem;
-        }
-        .sub-header {
-            font-size: 1.1rem;
-        }
-        .metric-card {
-            padding: 1.5rem;
-        }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -423,128 +249,42 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
         return [0.35, 0.30, 0.20, 0.10, 0.05]  # Low utilization scenario
  
 
-# Professional Header Section
+# Header section
 st.markdown('<h1 class="main-header">Fleet Size Optimization Platform</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">Advanced Value Function Approximation for Crowdsourced Delivery Operations<br><em>Production-Ready Research Implementation</em></p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-header">Value Function Approximation for Crowdsourced Delivery Operations</p>', unsafe_allow_html=True)
 
-# Professional badges and credentials
-st.markdown("""
-<div style="text-align: center; margin: 2rem 0;">
-    <span class="professional-badge">🚀 Production Ready</span>
-    <span class="professional-badge">📊 Research Validated</span>
-    <span class="professional-badge">⚡ Real-time Optimization</span>
-    <span class="professional-badge">🎯 Industry Grade</span>
-</div>
-""", unsafe_allow_html=True)
-
-# Enhanced author info with professional presentation
-st.markdown("""
-<div class="portfolio-section">
-    <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: white; margin-bottom: 1rem; font-size: 2rem;">Sahil Bhatt</h2>
-        <h3 style="color: #94a3b8; margin-bottom: 1.5rem; font-weight: 400;">Applied Scientist | Machine Learning & Operations Research</h3>
-        
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
-            <a href="mailto:sahil.bhatt@torontomu.ca" class="social-link">📧 sahil.bhatt@torontomu.ca</a>
-            <a href="https://linkedin.com/in/sahilpbhatt" class="social-link">💼 LinkedIn Profile</a>
-            <a href="https://github.com/sahilpbhatt" class="social-link">🔗 GitHub Portfolio</a>
-        </div>
-        
-        <div style="margin-bottom: 1.5rem;">
-            <h4 style="color: white; margin-bottom: 1rem;">Core Expertise</h4>
-            <span class="skill-tag">Machine Learning</span>
-            <span class="skill-tag">Operations Research</span>
-            <span class="skill-tag">Optimization Algorithms</span>
-            <span class="skill-tag">Python Development</span>
-            <span class="skill-tag">Data Science</span>
-            <span class="skill-tag">Streamlit</span>
-            <span class="skill-tag">Research Implementation</span>
-            <span class="skill-tag">Production Deployment</span>
-        </div>
-        
-        <div style="margin-bottom: 1rem;">
-            <h4 style="color: white; margin-bottom: 1rem;">Key Achievements</h4>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; text-align: left;">
-                <div class="achievement-card">
-                    <strong>🎓 Master's Graduate</strong><br>
-                    <small>Toronto Metropolitan University</small>
-                </div>
-                <div class="achievement-card">
-                    <strong>📚 Research Publication</strong><br>
-                    <small>Omega Journal (Under Review)</small>
-                </div>
-                <div class="achievement-card">
-                    <strong>🚀 Production Deployment</strong><br>
-                    <small>Cloud-Native Applications</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+# Author info bar
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.markdown("**Developer:** Sahil Bhatt")
+with col2:
+    st.markdown("**[📧 Email](mailto:sahil.bhatt@torontomu.ca)**")
+with col3:
+    st.markdown("**[💼 LinkedIn](https://linkedin.com/in/sahilpbhatt)**")
+with col4:
+    st.markdown("**[🔗 GitHub](https://github.com/sahilpbhatt)**")
 
 st.markdown("---")
 
-# Enhanced Sidebar Configuration
+# Sidebar configuration
 with st.sidebar:
     st.image("https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg", use_column_width=True)
     
-    st.markdown("""
-    <div style="text-align: center; margin-bottom: 1rem;">
-        <h3 style="color: #1e40af; margin-bottom: 0.5rem;">🚀 Live Demo</h3>
-        <p style="color: #64748b; font-size: 0.9rem; margin: 0;">
-            Interactive optimization platform showcasing advanced research implementation
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    
     st.header("⚙️ Optimization Parameters")
     
-    with st.expander("🔬 Research Foundation", expanded=True):
+    with st.expander("ℹ️ About This Platform", expanded=True):
         st.markdown("""
-        **📚 Published Research**
+        **Research Implementation**
         
-        This platform implements the **Value Function Approximation (VFA)** algorithm 
-        from our peer-reviewed paper:
+        This platform implements the Value Function Approximation (VFA) algorithm 
+        from the paper "Fleet Size Planning in Crowdsourced Delivery" 
+        (Omega Journal, 2024).
         
-        *"Fleet Size Planning in Crowdsourced Delivery: Balancing Service Level and Driver Utilization"*
-        
-        **Authors:** Aliaa Alnaggar, **Sahil Bhatt**  
-        **Journal:** Omega - The International Journal of Management Science  
-        **Status:** Under Review (2024)
-        
-        **🎯 Key Innovations:**
-        - Novel two-stage stochastic optimization
-        - Advanced MDP simulation framework
-        - Real-world Chicago dataset validation
-        - Production-ready algorithm deployment
-        
-        **📊 Performance Metrics:**
-        - 65% fleet size reduction vs baseline
-        - 97% service level achievement
-        - 93% driver utilization optimization
-        - <60s real-time computation
-        """)
-    
-    with st.expander("💼 Professional Impact", expanded=False):
-        st.markdown("""
-        **🏢 Industry Applications:**
-        - Food delivery optimization (Uber Eats, DoorDash)
-        - Grocery delivery planning (Instacart)
-        - Package delivery logistics (Amazon)
-        - Ride-hailing fleet management (Uber, Lyft)
-        
-        **💰 Business Value:**
-        - Cost reduction through optimal fleet sizing
-        - Improved service quality metrics
-        - Enhanced driver satisfaction
-        - Scalable optimization framework
-        
-        **🔧 Technical Excellence:**
-        - Production-grade implementation
-        - Cloud-native architecture
-        - Real-time optimization capabilities
-        - Comprehensive performance analytics
+        **Key Features:**
+        - Two-stage stochastic optimization
+        - Markov Decision Process simulation
+        - Real-world dataset validation
+        - Production-ready deployment
         """)
     
     st.subheader("🎯 Optimization Objectives")
@@ -623,35 +363,25 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
 ])
 
 with tab1:
-    st.markdown("""
-    <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: #1e40af; margin-bottom: 0.5rem;">📊 Real-Time Optimization Dashboard</h2>
-        <p style="color: #64748b; font-size: 1.1rem;">
-            Interactive platform demonstrating advanced fleet optimization algorithms with real-time performance analytics
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.header("Real-Time Optimization Dashboard")
     
-    # Professional action buttons
     col1, col2, col3 = st.columns([2, 1, 1])
     
     with col1:
-        if st.button("🚀 Execute Fleet Optimization", type="primary", use_container_width=True):
+        if st.button("🚀 Run Fleet Optimization", type="primary", use_container_width=True):
             with st.spinner("Executing Value Function Approximation Algorithm..."):
                 # Progress simulation
                 progress_bar = st.progress(0)
                 status_text = st.empty()
                 
                 steps = [
-                    (0.12, "🔬 Initializing Markov Decision Process state space..."),
-                    (0.25, "🎯 Configuring Value Function Approximation parameters..."),
-                    (0.38, "⚡ Executing Boltzmann exploration strategy..."),
-                    (0.52, "🚗 Simulating dynamic driver-order matching..."),
-                    (0.65, "📊 Evaluating stochastic scenarios (100 iterations)..."),
-                    (0.78, "🧮 Computing optimal value function..."),
-                    (0.88, "🔄 Converging to global optimum..."),
-                    (0.95, "📈 Generating performance analytics..."),
-                    (1.0, "✅ Optimization completed successfully!")
+                    (0.15, "Initializing MDP state space..."),
+                    (0.30, "Running Boltzmann exploration..."),
+                    (0.45, "Simulating driver-order matching..."),
+                    (0.60, "Evaluating scenarios..."),
+                    (0.75, "Computing value function..."),
+                    (0.90, "Converging to optimal solution..."),
+                    (1.0, "Finalizing results...")
                 ]
                 
                 for progress, status in steps:
@@ -669,16 +399,7 @@ with tab1:
                 progress_bar.empty()
                 status_text.empty()
                 
-                # Professional success message
-                st.markdown("""
-                <div class="highlight-box">
-                    <h3 style="color: #1e40af; margin-bottom: 1rem;">🎉 Optimization Successfully Completed!</h3>
-                    <p style="margin-bottom: 0.5rem;"><strong>Algorithm:</strong> Value Function Approximation (VFA)</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>Convergence:</strong> Global optimum achieved</p>
-                    <p style="margin-bottom: 0;"><strong>Performance:</strong> Real-time optimization with industry-grade accuracy</p>
-                </div>
-                """, unsafe_allow_html=True)
-                
+                st.success("✅ Optimization completed successfully!")
                 st.balloons()
      
     with col2:
@@ -691,15 +412,8 @@ with tab1:
         
         st.markdown("---")
         
-        # Enhanced Key Performance Indicators
-        st.markdown("""
-        <div style="text-align: center; margin: 2rem 0;">
-            <h3 style="color: #1e40af; margin-bottom: 0.5rem;">📊 Key Performance Indicators</h3>
-            <p style="color: #64748b; font-size: 1rem;">
-                Real-time metrics demonstrating optimization effectiveness and business impact
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+        # Key Performance Indicators
+        st.subheader("📊 Key Performance Indicators")
         
         kpi1, kpi2, kpi3, kpi4 = st.columns(4)
         
@@ -1284,38 +998,25 @@ with tab4:
     st.dataframe(styled_df, hide_index=True, use_container_width=True)
 
 with tab5:
-    st.markdown("""
-    <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="color: #1e40af; margin-bottom: 0.5rem;">🔬 Technical Implementation Details</h2>
-        <p style="color: #64748b; font-size: 1.1rem;">
-            Deep dive into the mathematical foundations, algorithmic innovations, and production implementation
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.header("Technical Implementation Details")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        with st.expander("🎯 Mathematical Problem Formulation", expanded=True):
+        with st.expander("🎯 Problem Formulation", expanded=True):
             st.markdown("""
-            ### Two-Stage Stochastic Optimization Framework
+            ### Two-Stage Stochastic Optimization
             
-            **🔹 First Stage (Tactical Planning):**
-            - **Decision Variables:** Fleet size per period `x_p ∈ ℤ⁺`
-            - **Objective:** Minimize total operational cost + penalty violations
-            - **Constraints:** Service level and utilization targets
+            **First Stage (Tactical):**
+            - Decision: Fleet size per period `x_p`
+            - Objective: Minimize cost + penalties
             
-            **🔹 Second Stage (Operational Dynamics):**
-            - **Markov Decision Process** with stochastic transitions
-            - **Dynamic driver-order matching** with real-time decisions
-            - **State Space:** `S_t = (R_t, D_t, K_t, U_t)` where:
-              - `R_t`: Available drivers at time t
-              - `D_t`: Pending delivery orders
-              - `K_t`: Driver locations and status
-              - `U_t`: Historical utilization metrics
+            **Second Stage (Operational):**
+            - Markov Decision Process
+            - Dynamic driver-order matching
+            - State: `S_t = (R_t, D_t, K_t)`
             """)
             
-            st.markdown("**📐 Mathematical Formulation:**")
             st.latex(r"""
             \min_{x,\alpha} \sum_{p=1}^P c_p x_p + \alpha
             """)
@@ -1323,187 +1024,75 @@ with tab5:
             st.latex(r"""
             \text{s.t. } \alpha \geq w_s f^{serv}(\beta, Q(x)) + (1-w_s) f^{util}(\mu, L(x))
             """)
-            
-            st.latex(r"""
-            x_p \geq 0, \quad \forall p \in \{1, 2, ..., P\}
-            """)
-            
-            st.markdown("""
-            **🔍 Key Innovation:** The formulation handles **decision-dependent uncertainty** where 
-            fleet size decisions directly impact the stochastic arrival processes of both drivers and orders.
-            """)
         
-        with st.expander("🔬 Value Function Approximation Algorithm", expanded=True):
-            st.markdown("""
-            ### Advanced VFA Implementation
-            
-            **🎯 Core Innovation:** Our VFA algorithm combines **Boltzmann exploration** with **adaptive learning rates** 
-            to efficiently navigate the complex solution space while maintaining convergence guarantees.
-            """)
-            
-            st.markdown("""
-            <div class="code-block">
+        with st.expander("🔬 Value Function Approximation"):
+            st.code("""
 def value_function_approximation(data, params):
-    \"\"\"
-    Advanced Value Function Approximation for Fleet Optimization
-    
-    Args:
-        data: Historical demand and driver patterns
-        params: Algorithm hyperparameters (learning_rate, temperature, etc.)
-    
-    Returns:
-        optimal_fleet_sizes: Period-by-period fleet allocation
-    \"\"\"
-    # Initialize value function with domain knowledge
-    V = initialize_value_function(state_space_size=10000)
+    V = initialize_value_function()
     x_best = None
-    convergence_history = []
     
     for iteration in range(max_iterations):
-        # Adaptive Boltzmann exploration with temperature decay
-        temperature = compute_adaptive_temperature(iteration, params)
-        x = boltzmann_explore(V, temperature, exploration_bonus=0.1)
+        # Boltzmann exploration
+        temperature = compute_temperature(iteration)
+        x = boltzmann_explore(V, temperature)
         
-        # Multi-scenario MDP evaluation
-        scenarios = generate_scenarios(data, num_scenarios=100)
-        L_x, Q_x = simulate_mdp_parallel(x, scenarios)
+        # Evaluate via MDP
+        L_x, Q_x = simulate_mdp(x, scenarios=100)
         
-        # Update value function with momentum
-        V = update_value_function_momentum(V, x, L_x, Q_x, 
-                                         learning_rate=0.01, momentum=0.9)
+        # Update value function
+        V = update_value_function(V, x, L_x, Q_x)
         
-        # Track best solution with improvement detection
-        if is_significantly_better(x, x_best, threshold=0.01):
-            x_best = x.copy()
-            convergence_history.append(iteration)
+        # Track best solution
+        if is_better(x, x_best):
+            x_best = x
         
-        # Early stopping with convergence detection
-        if converged(V, tolerance=1e-6) or iteration > 1000:
+        # Check convergence
+        if converged(V):
             break
     
-    return x_best, convergence_history
-            </div>
-            """, unsafe_allow_html=True)
-            
-            st.markdown("""
-            **🚀 Key Algorithmic Features:**
-            - **Parallel MDP Simulation:** 100 scenarios evaluated simultaneously
-            - **Adaptive Temperature:** Dynamic exploration-exploitation balance
-            - **Momentum-based Updates:** Accelerated convergence with stability
-            - **Early Stopping:** Computational efficiency with quality guarantees
-            """)
+    return x_best
+            """, language='python')
     
     with col2:
-        with st.expander("📊 Markov Decision Process Framework", expanded=True):
+        with st.expander("📊 MDP Components", expanded=True):
             st.markdown("""
-            ### 🔹 State Space Architecture
+            ### State Space
+            - **Drivers**: Location, availability, utilization
+            - **Orders**: Origin, destination, deadline
+            - **Metrics**: Service level, utilization history
             
-            **Multi-dimensional State Representation:**
-            - **Driver States:** `(location, availability, utilization_history, skill_level)`
-            - **Order States:** `(origin, destination, deadline, priority, value)`
-            - **System States:** `(service_level, utilization_rate, queue_length, time_of_day)`
-            - **Historical Context:** `(demand_patterns, performance_metrics, seasonal_factors)`
+            ### Action Space
+            - Binary matching decisions `y_tab`
+            - Time-feasible assignments only
             
-            **State Space Size:** ~10,000 discrete states with continuous extensions
-            """)
+            ### Transition Function
+            - Stochastic driver arrivals (Binomial)
+            - Stochastic order arrivals (Poisson)
+            - Deterministic service times
             
-            st.markdown("""
-            ### 🔹 Action Space Design
-            
-            **Binary Matching Decisions:** `y_tab ∈ {0,1}` for driver-order pairs
-            - **Feasibility Constraints:** Time, distance, and capacity limits
-            - **Preference Modeling:** Driver preferences and order priorities
-            - **Dynamic Routing:** Real-time path optimization
-            
-            **Action Space Complexity:** O(n_drivers × n_orders) with pruning
-            """)
-            
-            st.markdown("""
-            ### 🔹 Stochastic Transition Model
-            
-            **Driver Arrival Process:**
+            ### Reward Function
             ```
-            P(driver_arrives) ~ Binomial(n_available, q_enter)
-            where q_enter = f(fleet_size, demand_level, time_of_day)
+            r_t = profit - w_s * service_penalty 
+                        - (1-w_s) * util_penalty
             ```
-            
-            **Order Arrival Process:**
-            ```
-            P(order_arrives) ~ Poisson(λ_demand)
-            where λ_demand = g(time_of_day, location, historical_patterns)
-            ```
-            
-            **Service Time Distribution:**
-            ```
-            service_time ~ LogNormal(μ, σ²)
-            with location-dependent parameters
-            ```
-            """)
-            
-            st.markdown("""
-            ### 🔹 Reward Function Design
-            
-            **Multi-objective Reward Structure:**
-            ```
-            r_t = revenue_t - cost_t - w_s × service_penalty_t - (1-w_s) × util_penalty_t
-            ```
-            
-            **Component Breakdown:**
-            - **Revenue:** Order completion fees and surge pricing
-            - **Cost:** Driver wages and operational expenses  
-            - **Service Penalty:** Quadratic penalty for missed service targets
-            - **Utilization Penalty:** Linear penalty for underutilized drivers
             """)
         
-        with st.expander("⚡ Computational Complexity & Performance", expanded=True):
+        with st.expander("⚡ Computational Complexity"):
             st.markdown("""
-            ### 🚀 Algorithm Complexity Analysis
+            ### Algorithm Complexity
             
-            **Theoretical Complexity:**
-            | Component | Complexity | Practical Impact |
-            |-----------|------------|------------------|
-            | State Space | O(n_drivers × n_orders) | ~10,000 states |
-            | Action Space | O(n_drivers × n_orders) | Pruned to feasible actions |
-            | Value Update | O(iterations × scenarios) | 1000 iterations × 100 scenarios |
-            | Matching Problem | O(n³) Hungarian | Optimized with heuristics |
-            | **Total Runtime** | **O(n³ × iterations)** | **~45 seconds average** |
+            | Component | Complexity |
+            |-----------|------------|
+            | State Space | O(n_drivers × n_orders) |
+            | Action Space | O(n_drivers × n_orders) |
+            | Value Update | O(iterations × scenarios) |
+            | Matching Problem | O(n³) Hungarian algorithm |
             
-            **🎯 Performance Optimizations:**
-            - **Parallel Scenario Evaluation:** 100 scenarios computed simultaneously
-            - **Adaptive State Pruning:** Dynamic reduction of irrelevant states
-            - **Cached Value Functions:** Memoization of frequently accessed states
-            - **Rolling Horizon Approach:** Reduced computational burden
-            - **Early Convergence Detection:** Stopping criteria to prevent over-optimization
-            """)
-            
-            st.markdown("""
-            ### 📊 Scalability Analysis
-            
-            **Real-world Performance Metrics:**
-            - **Small Scale (100 drivers):** <10 seconds
-            - **Medium Scale (500 drivers):** ~30 seconds  
-            - **Large Scale (1000+ drivers):** ~60 seconds
-            - **Memory Usage:** <2GB for largest instances
-            
-            **🔧 Production Optimizations:**
-            - **Distributed Computing:** Multi-core parallelization
-            - **GPU Acceleration:** CUDA implementation for matrix operations
-            - **Incremental Updates:** Only recompute changed components
-            - **Approximation Methods:** Trade accuracy for speed when needed
-            """)
-            
-            st.markdown("""
-            ### 🎯 Quality vs Speed Trade-offs
-            
-            **Convergence Guarantees:**
-            - **Theoretical:** Global optimum with infinite iterations
-            - **Practical:** 99.5% optimal within 1000 iterations
-            - **Real-time:** 95% optimal within 100 iterations (<10 seconds)
-            
-            **Adaptive Quality Control:**
-            - **High-stakes periods:** Full optimization (peak hours)
-            - **Low-demand periods:** Fast approximation (off-peak)
-            - **Emergency scenarios:** Greedy heuristic (<1 second)
+            ### Optimization Techniques
+            - Parametric cost function approximation
+            - Rolling horizon approach
+            - Parallel scenario evaluation
+            - Cached value functions
             """)
 
 with tab6:
@@ -1636,73 +1225,20 @@ with tab6:
         ```
         """)
 
-# Professional Footer Section
+# Footer
 st.markdown("---")
 st.markdown("""
-<div class="footer-section">
-    <h2 style="color: white; margin-bottom: 1.5rem; font-size: 2.2rem;">Ready to Transform Your Operations?</h2>
-    <p style="color: #94a3b8; margin-bottom: 2rem; font-size: 1.2rem; line-height: 1.6;">
-        This platform demonstrates the practical implementation of cutting-edge optimization research, 
-        showcasing how advanced algorithms can drive real business value in logistics and delivery operations.
+<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; text-align: center; color: white;'>
+    <h3 style='color: white; margin-bottom: 1rem;'>Ready to Optimize Your Fleet?</h3>
+    <p style='color: white; margin-bottom: 1.5rem;'>
+        This platform demonstrates implementation of optimization research.
     </p>
-    
-    <div style="margin-bottom: 2rem;">
-        <h3 style="color: white; margin-bottom: 1rem;">🚀 Key Capabilities Demonstrated</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
-            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                <strong style="color: #3b82f6;">🔬 Research Implementation</strong><br>
-                <small style="color: #94a3b8;">Peer-reviewed algorithm deployment</small>
-            </div>
-            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                <strong style="color: #10b981;">⚡ Real-time Optimization</strong><br>
-                <small style="color: #94a3b8;">Production-grade performance</small>
-            </div>
-            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                <strong style="color: #f59e0b;">📊 Data-Driven Insights</strong><br>
-                <small style="color: #94a3b8;">Comprehensive analytics</small>
-            </div>
-            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                <strong style="color: #ef4444;">🎯 Business Impact</strong><br>
-                <small style="color: #94a3b8;">Measurable ROI improvement</small>
-            </div>
-        </div>
-    </div>
-    
-    <div style="margin-bottom: 2rem;">
-        <h3 style="color: white; margin-bottom: 1rem;">💼 Professional Profile</h3>
-        <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
-            <h4 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;">Sahil Bhatt</h4>
-            <p style="color: #94a3b8; margin-bottom: 1rem; font-size: 1.1rem;">
-                Applied Scientist | Machine Learning & Operations Research Specialist
-            </p>
-            <p style="color: #e2e8f0; font-size: 1rem; line-height: 1.6;">
-                Master's graduate with expertise in optimization algorithms, machine learning, and production deployment. 
-                Proven track record of implementing research-grade solutions in real-world applications.
-            </p>
-        </div>
-    </div>
-    
-    <div style="margin-bottom: 2rem;">
-        <h3 style="color: white; margin-bottom: 1rem;">📞 Let's Connect</h3>
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
-            <a href="mailto:sahil.bhatt@torontomu.ca" class="social-link" style="font-size: 1.1rem;">
-                📧 sahil.bhatt@torontomu.ca
-            </a>
-            <a href="https://linkedin.com/in/sahilpbhatt" class="social-link" style="font-size: 1.1rem;">
-                💼 LinkedIn Profile
-            </a>
-            <a href="https://github.com/sahilpbhatt" class="social-link" style="font-size: 1.1rem;">
-                🔗 GitHub Portfolio
-            </a>
-        </div>
-    </div>
-    
-    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1.5rem; margin-top: 2rem;">
-        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0;">
-            © 2024 Sahil Bhatt | Fleet Size Optimization Platform | 
-            <em>Demonstrating Advanced Research Implementation in Production Environments</em>
-        </p>
-    </div>
+    <p style='color: white;'>
+        <strong>Sahil Bhatt</strong> | Applied Scientist | Machine Learning & Operations Research<br>
+        <a href='mailto:sahil.bhatt@torontomu.ca' style='color: white;'>📧 sahil.bhatt@torontomu.ca</a> | 
+        <a href='https://github.com/sahilpbhatt' style='color: white;'>🔗 GitHub</a> | 
+        <a href='https://linkedin.com/in/sahilpbhatt' style='color: white;'>💼 LinkedIn</a>
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
