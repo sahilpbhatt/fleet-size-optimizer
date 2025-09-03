@@ -182,7 +182,7 @@ st.markdown("""
 
 # Professional Header Section
 st.markdown('<h1 class="main-header">Fleet Size Optimization Platform</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">Stochastic Optimization Framework for Fleet Size Planning in Crowdsourced Delivery<br>Research Implementation | M.S. Thesis Project | Large-Scale Transportation Analysis</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-header">Stochastic Optimization Framework for Fleet Size Planning in Crowdsourced Delivery<br>Research Implementation | MASc Thesis Project | Large-Scale Transportation Analysis</p>', unsafe_allow_html=True)
 
 # Enhanced Author Information Section
 author_col1, author_col2, author_col3 = st.columns([1, 2, 1])
@@ -190,7 +190,7 @@ with author_col2:
     st.markdown("""
     <div style='text-align: center; padding: 1rem; background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%); border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);'>
         <h3 style='margin-bottom: 1rem; color: #1e293b;'>Sahil Bhatt</h3>
-        <p style='color: #64748b; margin-bottom: 1rem;'>M.S. Operations Research | Machine Learning Engineer</p>
+        <p style='color: #64748b; margin-bottom: 1rem;'>Master of Applied Science (MASc), Operations Research | Machine Learning Engineer</p>
         <div style='display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;'>
             <span class='author-badge'>📧 <a href='mailto:sahil.bhatt@torontomu.ca' style='text-decoration: none; color: #5B6FED;'>Email</a></span>
             <span class='author-badge'>💼 <a href='https://linkedin.com/in/sahilpbhatt' style='text-decoration: none; color: #5B6FED;'>LinkedIn</a></span>
@@ -1067,3 +1067,4 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
