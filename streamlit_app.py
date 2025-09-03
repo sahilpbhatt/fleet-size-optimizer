@@ -1231,7 +1231,7 @@ st.markdown("""
 <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; text-align: center; color: white;'>
     <h3 style='color: white; margin-bottom: 1rem;'>Ready to Optimize Your Fleet?</h3>
     <p style='color: white; margin-bottom: 1.5rem;'>
-        This platform demonstrates production-ready implementation of cutting-edge optimization research.
+        This platform demonstrates implementation of optimization research.
     </p>
     <p style='color: white;'>
         <strong>Sahil Bhatt</strong> | Applied Scientist | Machine Learning & Operations Research<br>
@@ -1241,3 +1241,4 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
