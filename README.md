@@ -178,9 +178,9 @@ If you use this code in your research, please cite:
   title={Fleet Size Planning in Crowdsourced Delivery: 
          Balancing Service Level and Driver Utilization},
   author={Alnaggar, Aliaa and Bhatt, Sahil},
-  journal={Omega},
+  journal={Omega (Under Review)},
   year={2024},
-  publisher={Elsevier}
+  note={Under Review}
 }
 ```
 
