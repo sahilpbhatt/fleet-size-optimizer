@@ -1,6 +1,6 @@
 # 🚚 Fleet Size Optimization Platform
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://fleet-optimizer.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://fleet-size-optimizer-fvoej2nvaszyu2uepjqshr.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Research](https://img.shields.io/badge/Research-Omega%20Journal-purple.svg)](https://doi.org/journal.omega)
@@ -9,7 +9,7 @@
 
 A cloud-deployed platform that determines optimal fleet sizes for crowdsourced delivery services, balancing service level objectives with driver utilization targets using advanced optimization techniques.
 
-### 🚀 [Live Demo]([https://fleet-size-optimizer-fvoej2nvaszyu2uepjqshr.streamlit.app/])
+### 🚀 [Live Demo](https://fleet-size-optimizer-fvoej2nvaszyu2uepjqshr.streamlit.app/)
 
 ## 📊 Key Results
 
@@ -30,13 +30,13 @@ Based on the paper: **"Fleet Size Planning in Crowdsourced Delivery: Balancing S
 ## ⚡ Quick Start
 
 ### Option 1: Use Live Demo
-Visit [https://fleet-optimizer.streamlit.app](https://fleet-optimizer.streamlit.app)
+Visit [https://fleet-size-optimizer-fvoej2nvaszyu2uepjqshr.streamlit.app/](https://fleet-size-optimizer-fvoej2nvaszyu2uepjqshr.streamlit.app/)
 
 ### Option 2: Run Locally
 ```bash
 # Clone repository
-git clone https://github.com/sahilbhatt/fleet-optimizer.git
-cd fleet-optimizer
+git clone https://github.com/sahilpbhatt/fleet-size-optimizer.git
+cd fleet-size-optimizer
 
 # Install dependencies
 pip install -r requirements.txt
