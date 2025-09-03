@@ -1233,6 +1233,8 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)"""
+with st.expander("🔧 Value Function Approximation (Pseudocode)"):
+    st.code("""
 def value_function_approximation(data, params):
     V = initialize_value_function()
     x_best = None
@@ -1257,8 +1259,8 @@ def value_function_approximation(data, params):
             break
     
     return x_best
-            """, language='python')
-    
+""", language="python")
+
     with col2:
         with st.expander("📊 MDP Components", expanded=True):
             st.markdown("""
@@ -1454,3 +1456,4 @@ streamlit run streamlit_app.py""", language='bash')
                 line=dict(color='#3B82F6', width=2),
                 mode='lines+markers',
                 hovertemplate='Period: %{x}<br
+
