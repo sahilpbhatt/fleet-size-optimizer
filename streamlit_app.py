@@ -404,14 +404,14 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
 
 # Sidebar with enhanced design
 with st.sidebar:
-    # Professional logo section
+    # Full-width logo section
     st.markdown("""
-    <div style='text-align: center; padding: 2rem 1rem; background: linear-gradient(135deg, #5B6FED 0%, #7B68EE 100%); 
-                border-radius: 12px; margin-bottom: 2rem;'>
+    <div style='margin: 0; padding: 0;'>
         <img src="https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg" 
-             style="width: 160px; height: auto; border-radius: 12px;" />
+             style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;' />
     </div>
-    """, unsafe_allow_html=True) 
+    """, unsafe_allow_html=True)
+
     st.header("⚙️ Configuration Panel")
     
     # Quick Start Section
@@ -872,5 +872,6 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
