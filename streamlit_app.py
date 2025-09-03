@@ -403,15 +403,16 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
         return [0.35, 0.30, 0.20, 0.10, 0.05]
 
 # Sidebar with enhanced design
+
 with st.sidebar:
     # Professional logo section
     st.markdown("""
     <div style='text-align: center; padding: 2rem 1rem; background: linear-gradient(135deg, #5B6FED 0%, #7B68EE 100%); border-radius: 12px; margin-bottom: 2rem;'>
-        <h2 style='color: white; margin: 0; font-size: 1.8rem;'>🚚</h2>
-        <p style='color: white; margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.95;'>Fleet Optimizer v2.0</p>
+        <img src="https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg" 
+             style="width: 80px; height: auto; border-radius: 8px; margin-bottom: 0.5rem;" />
+        <p style='color: white; margin: 0; font-size: 0.9rem; opacity: 0.95;'>Fleet Optimizer v2.0</p>
     </div>
-    """, unsafe_allow_html=True)
-    
+    """, unsafe_allow_html=True) 
     st.header("⚙️ Configuration Panel")
     
     # Quick Start Section
@@ -872,3 +873,4 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
