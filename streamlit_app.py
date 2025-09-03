@@ -408,9 +408,10 @@ with st.sidebar:
     st.markdown("""
     <div style='margin: 0; padding: 0;'>
         <img src="https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg" 
-             style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;' />
+             style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;" />
     </div>
     """, unsafe_allow_html=True)
+
 
     st.header("⚙️ Configuration Panel")
     
@@ -872,6 +873,7 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
