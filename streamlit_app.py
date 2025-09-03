@@ -194,7 +194,7 @@ with author_col2:
             <span class='author-badge'>📧 <a href='mailto:sahil.bhatt@torontomu.ca' style='text-decoration: none; color: #5B6FED;'>Email</a></span>
             <span class='author-badge'>💼 <a href='https://linkedin.com/in/sahilpbhatt' style='text-decoration: none; color: #5B6FED;'>LinkedIn</a></span>
             <span class='author-badge'>🔗 <a href='https://github.com/sahilpbhatt' style='text-decoration: none; color: #5B6FED;'>GitHub</a></span>
-            <span class='author-badge'>📄 <a href='https://github.com/sahilpbhatt/resume' style='text-decoration: none; color: #5B6FED;'>Resume</a></span>
+            <span class='author-badge'>📄 <a href='https://sahilpbhatt.github.io/' style='text-decoration: none; color: #5B6FED;'>Personal Website</a></span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -873,6 +873,7 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
