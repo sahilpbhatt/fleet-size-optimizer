@@ -3,7 +3,8 @@ Fleet Size Optimization for Crowdsourced Delivery
 Production-Ready Research Implementation
 Author: Sahil Bhatt, M.S. Operations Research
 Based on: "Fleet Size Planning in Crowdsourced Delivery: Balancing Service Level and Driver Utilization"
-Authors: Sahil Bhatt, Aliaa Alnaggar
+Authors: Aliaa Alnaggar, Sahil Bhatt
+Journal: Omega - The International Journal of Management Science (Under review, 2024)
 """
 
 import streamlit as st
@@ -181,7 +182,7 @@ st.markdown("""
 
 # Professional Header Section
 st.markdown('<h1 class="main-header">Fleet Size Optimization Platform</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">Advanced Value Function Approximation for Crowdsourced Delivery Operations<br>📚 Research Implementation | 🏆 M.S. Thesis Project | 📊 100M+ Trips Analyzed</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-header">Stochastic Optimization Framework for Fleet Size Planning in Crowdsourced Delivery<br>Research Implementation | M.S. Thesis Project | Large-Scale Transportation Analysis</p>', unsafe_allow_html=True)
 
 # Enhanced Author Information Section
 author_col1, author_col2, author_col3 = st.columns([1, 2, 1])
@@ -417,24 +418,29 @@ with st.sidebar:
     
     # Quick Start Section
     with st.expander("🚀 Quick Demo", expanded=False):
+        st.markdown("""
+        **Optimize with Pre-configured Parameters**
+        
+        Use this button to automatically load an optimal configuration that balances service level (60%) and driver utilization (40%). This configuration has been validated on historical data and represents a practical trade-off between customer satisfaction and operational efficiency.
+        """)
         if st.button("Load Optimal Scenario", use_container_width=True):
             st.session_state.quick_demo = True
-            st.success("Loaded optimal configuration!")
+            st.success("Loaded optimal configuration with balanced weights and Chicago dataset!")
     
     with st.expander("ℹ️ About This Platform", expanded=True):
         st.markdown("""
         **Research Implementation**
         
-        This platform implements cutting-edge optimization algorithms from my M.S. thesis research, submitted to *Omega Journal* (2024).
+        This platform implements optimization algorithms from my M.S. thesis research, currently under review at *Omega: The International Journal of Management Science* (submitted 2024).
         
         **Business Impact:**
-        - 💰 Reduced operational costs by 35%
-        - 📈 Improved driver satisfaction by 40%
-        - 🎯 Maintained 97%+ service levels
-        - ⚡ <1 minute optimization time
+        - Reduced operational costs by 35%
+        - Improved driver satisfaction by 40%
+        - Maintained 97%+ service levels
+        - Fast optimization time (<1 minute)
         
         **Key Innovation:**
-        First-of-its-kind solution addressing decision-dependent uncertainty in crowdsourced delivery systems.
+        A novel solution addressing decision-dependent uncertainty in crowdsourced delivery systems through a stochastic optimization framework and value function approximation.
         """)
     
     st.subheader("🎯 Optimization Objectives")
@@ -812,9 +818,111 @@ with tab2:
             st.dataframe(driver_metrics, hide_index=True, use_container_width=True)
 
 with tab3:
-    st.header("Performance Analysis")
+    st.header("Performance Metrics & Analysis")
     if 'results' not in st.session_state:
-        st.info("👆 Please run optimization first to see analysis")
+        st.info("👆 Please run optimization first to see performance metrics and analysis.")
+    else:
+        results = st.session_state.results
+        st.subheader("📊 Performance Metrics")
+        
+        # Create two-column layout for better presentation
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            # Key operational metrics
+            st.markdown("#### Operational Performance")
+            ops_metrics = pd.DataFrame({
+                'Metric': [
+                    'Service Level',
+                    'Driver Utilization',
+                    'Fleet Size',
+                    'Platform Profit'
+                ],
+                'Value': [
+                    f"{results['service_level']:.1%}",
+                    f"{results['utilization']:.1%}",
+                    f"{results['total_fleet']:,}",
+                    f"${results['platform_profit']:,.0f}"
+                ],
+                'Target': [
+                    "95.0%",
+                    "80.0%",
+                    "Minimize",
+                    "Maximize"
+                ]
+            })
+            st.dataframe(ops_metrics, hide_index=True, use_container_width=True)
+        
+        with col2:
+            # Driver-specific metrics
+            st.markdown("#### Driver Experience Metrics")
+            driver_metrics = pd.DataFrame({
+                'Metric': [
+                    'Average Idle Time',
+                    'Empty Distance',
+                    'Drivers Meeting Target',
+                    'Demand Fulfilled'
+                ],
+                'Value': [
+                    f"{results['idle_time']:.1f} min",
+                    f"{results['empty_distance']:.2f} km",
+                    f"{results['drivers_meeting_target']:.0%}",
+                    f"{results['demand_fulfilled']:.1%}"
+                ],
+                'Impact': [
+                    "Lower is better",
+                    "Lower is better",
+                    "Higher is better",
+                    "Higher is better"
+                ]
+            })
+            st.dataframe(driver_metrics, hide_index=True, use_container_width=True)
+        
+        # Show distribution of utilization among drivers
+        st.subheader("Driver Utilization Distribution")
+        util_data = {
+            'Utilization Level': ['0-20%', '21-40%', '41-60%', '61-80%', '81-100%'],
+            'Percentage of Drivers': [p*100 for p in results['utilization_distribution']]
+        }
+        util_df = pd.DataFrame(util_data)
+        
+        fig = px.bar(
+            util_df, 
+            x='Utilization Level', 
+            y='Percentage of Drivers',
+            color='Percentage of Drivers',
+            color_continuous_scale='viridis',
+            text_auto='.1f'
+        )
+        fig.update_layout(
+            title="Distribution of Driver Utilization",
+            xaxis_title="Driver Utilization Range",
+            yaxis_title="Percentage of Total Fleet (%)",
+            yaxis=dict(ticksuffix="%"),
+            plot_bgcolor='white'
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        
+        st.markdown("""
+        <div class='info-box'>
+        <strong>Key Performance Indicators Explained:</strong><br>
+        <ul>
+        <li><b>Service Level</b>: Percentage of customer orders fulfilled on time. Our target is 95% or higher to ensure customer satisfaction.</li>
+        <li><b>Driver Utilization</b>: Percentage of time drivers are actively delivering. Higher utilization (target: 80%+) increases driver earnings and reduces operational costs.</li>
+        <li><b>Fleet Size</b>: Total number of drivers required across all time periods to meet service levels.</li>
+        <li><b>Platform Profit</b>: Estimated daily profit after accounting for operational costs.</li>
+        <li><b>Idle Time</b>: Average time drivers spend waiting between deliveries.</li>
+        <li><b>Empty Distance</b>: Average distance traveled without carrying a delivery.</li>
+        <li><b>Drivers Meeting Target</b>: Percentage of drivers achieving their utilization targets.</li>
+        <li><b>Demand Fulfilled</b>: Percentage of total customer demand that was successfully served.</li>
+        </ul>
+        </div>
+        
+        <div class='info-box' style='margin-top: 15px;'>
+        <strong>Analysis Insights:</strong><br>
+        This optimization balances the trade-off between maintaining high service levels for customers and ensuring drivers have sufficient work. The key challenge addressed is the "decision-dependent uncertainty" where the platform's fleet size decision affects both driver behavior and customer service outcomes.
+        </div>
+        """, unsafe_allow_html=True)
 
 with tab4:
     st.header("Benchmark Comparison")
@@ -835,26 +943,112 @@ with tab5:
     st.header("Technical Implementation Details")
     with st.expander("🎯 Problem Formulation", expanded=True):
         st.markdown("""
-        ### Two-Stage Stochastic Optimization
+        ### Two-Stage Stochastic Optimization Framework
         
-        **Mathematical Model:**
+        The research presents a novel methodology for optimizing fleet size in crowdsourced delivery platforms, focusing on the unique challenges presented by the gig economy model.
+        
+        **Core Problem:**
         """)
+        st.info("How many drivers should a platform request for each time period to balance service quality and driver utilization, considering that drivers have independent decision-making authority?")
+        
+        st.markdown("""
+        **Mathematical Formulation:**
+        
+        The problem is formulated as a two-stage stochastic optimization with decision-dependent uncertainty:
+        """)
+        
         st.latex(r"\min_{x,\alpha} \sum_{p=1}^P c_p x_p + \alpha")
         st.latex(r"\text{s.t. } \alpha \geq w_s f^{serv}(\beta, Q(x)) + (1-w_s) f^{util}(\mu, L(x))")
+        
+        st.markdown("""
+        Where:
+        - $x_p$ represents the fleet size for period $p$
+        - $c_p$ is the cost per driver in period $p$
+        - $w_s$ is the weight balancing service level vs. utilization
+        - $\\beta$ is the target service level
+        - $\\mu$ is the target driver utilization
+        - $Q(x)$ is the expected service level given fleet decision $x$
+        - $L(x)$ is the expected driver utilization given fleet decision $x$
+        """)
+        
+    with st.expander("🔍 Technical Methods", expanded=True):
+        st.markdown("""
+        ### Advanced Methodological Approach
+        
+        The research implements several sophisticated techniques to solve the fleet size planning problem:
+        
+        **1. Value Function Approximation (VFA)**
+        
+        VFA is a computational technique that estimates the long-term value of decisions in complex environments with uncertainty. In this application:
+        - The algorithm iteratively learns the impact of fleet size decisions on future performance
+        - It balances exploration of new strategies with exploitation of known good solutions
+        - The approach converges to near-optimal solutions without exhaustive enumeration
+        
+        **2. Markov Decision Process (MDP)**
+        
+        The delivery system is modeled as an MDP where:
+        - States represent the current system condition (available drivers, pending orders)
+        - Actions are the fleet size decisions for each period
+        - Transition probabilities capture the stochastic nature of driver availability and demand
+        - Rewards reflect both service level and utilization metrics
+        
+        **3. Parametric Cost Function Approximation**
+        
+        To handle the complex constraints of the problem:
+        - Service level constraints are incorporated as penalties in the objective function
+        - Utilization targets are similarly enforced through penalty terms
+        - The weight parameter ($w_s$) allows adjusting the balance between competing objectives
+        
+        **4. Practical Implementation**
+        
+        The research bridges theory and practice by:
+        - Analyzing over 100 million trips from real-world datasets
+        - Creating a computationally efficient algorithm suitable for production environments
+        - Providing a flexible framework that adapts to different market conditions
+        - Enabling real-time decision-making with fast convergence (<1 minute)
+        """)
+        
+    with st.expander("📈 Business Value", expanded=True):
+        st.markdown("""
+        ### Translating Technical Innovation to Business Impact
+        
+        The technical approach delivers measurable business outcomes:
+        
+        **For Delivery Platforms:**
+        - **Cost Reduction**: Optimized fleet size reduces excess driver capacity
+        - **Improved Reliability**: High service levels (95%+) ensure customer satisfaction
+        - **Operational Efficiency**: Balanced allocation of drivers across time periods
+        - **Data-Driven Decisions**: Replace intuition-based staffing with optimization
+        
+        **For Drivers:**
+        - **Higher Earnings**: Increased utilization means more deliveries per shift
+        - **Reduced Waiting**: Less idle time between assignments
+        - **Better Predictability**: More consistent work opportunities
+        
+        **For Customers:**
+        - **Faster Deliveries**: Sufficient driver availability ensures prompt service
+        - **Higher Reliability**: Reduced variance in delivery times
+        - **Better Experience**: Orders fulfilled at the expected service level
+        """)
 
 with tab6:
     st.header("Documentation & Resources")
     with st.expander("📚 Research Paper", expanded=True):
         st.markdown("""
-        ### Fleet Size Planning in Crowdsourced Delivery
+        ### Fleet Size Planning in Crowdsourced Delivery: Balancing Service Level and Driver Utilization
         
         **Authors:** Aliaa Alnaggar, Sahil Bhatt  
         **Journal:** Omega - The International Journal of Management Science  
-        **Status:** Submitted (2024)
+        **Status:** Under review (submitted 2024)
         
         **Abstract:**  
-        This paper addresses the fleet size planning problem for crowdsourced delivery platforms, 
-        focusing on optimizing the number of crowdsourced drivers to balance service level and utilization.
+        This paper addresses the fleet size planning problem for crowdsourced delivery platforms, focusing on optimizing the number of drivers to maintain service level while maximizing driver utilization. We propose a novel stochastic optimization framework that incorporates decision-dependent uncertainty, where the platform's fleet size decision affects both driver behavior and service outcomes. Using value function approximation within a Markov decision process framework, our approach handles the complex relationship between fleet size decisions, driver participation rates, and resulting service levels. Extensive computational experiments demonstrate that our methodology achieves high service levels (>95%) while significantly reducing fleet size and increasing driver utilization compared to benchmark approaches. The results show practical implications for delivery platforms operating in competitive markets with independent drivers.
+        
+        **Key Contributions:**
+        - A mathematical framework for fleet sizing in crowdsourced delivery under decision-dependent uncertainty
+        - A computationally efficient algorithm suitable for large-scale implementation
+        - Empirical validation using extensive real-world transportation data
+        - Practical insights for balancing platform profitability and driver satisfaction
         """)
 
 # Footer
