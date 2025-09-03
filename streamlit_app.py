@@ -194,7 +194,7 @@ with author_col2:
             <span class='author-badge'>📧 <a href='mailto:sahil.bhatt@torontomu.ca' style='text-decoration: none; color: #5B6FED;'>Email</a></span>
             <span class='author-badge'>💼 <a href='https://linkedin.com/in/sahilpbhatt' style='text-decoration: none; color: #5B6FED;'>LinkedIn</a></span>
             <span class='author-badge'>🔗 <a href='https://github.com/sahilpbhatt' style='text-decoration: none; color: #5B6FED;'>GitHub</a></span>
-            <span class='author-badge'>📄 <a href='https://sahilpbhatt.github.io/' style='text-decoration: none; color: #5B6FED;'>Personal Website</a></span>
+            <span class='author-badge'>📄 <a href='https://github.com/sahilpbhatt/resume' style='text-decoration: none; color: #5B6FED;'>Resume</a></span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -404,15 +404,14 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
 
 # Sidebar with enhanced design
 with st.sidebar:
-    # Full-width logo section
+    # Professional logo section
     st.markdown("""
-    <div style='margin: 0; padding: 0;'>
-        <img src="https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg" 
-             style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;" />
+    <div style='text-align: center; padding: 2rem 1rem; background: linear-gradient(135deg, #5B6FED 0%, #7B68EE 100%); border-radius: 12px; margin-bottom: 2rem;'>
+        <h2 style='color: white; margin: 0; font-size: 1.8rem;'>🚚</h2>
+        <p style='color: white; margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.95;'>Fleet Optimizer v2.0</p>
     </div>
     """, unsafe_allow_html=True)
-
-
+    
     st.header("⚙️ Configuration Panel")
     
     # Quick Start Section
@@ -812,50 +811,9 @@ with tab2:
             st.dataframe(driver_metrics, hide_index=True, use_container_width=True)
 
 with tab3:
-    st.header("Performance Metrics & Analysis")
+    st.header("Performance Analysis")
     if 'results' not in st.session_state:
-        st.info("👆 Please run optimization first to see performance metrics and analysis.")
-    else:
-        results = st.session_state.results
-        st.subheader("📊 Performance Metrics")
-        perf_metrics = pd.DataFrame({
-            'Metric': [
-                'Service Level',
-                'Driver Utilization',
-                'Fleet Size',
-                'Platform Profit',
-                'Average Idle Time',
-                'Empty Distance',
-                'Drivers Meeting Target',
-                'Demand Fulfilled'
-            ],
-            'Value': [
-                f"{results['service_level']:.1%}",
-                f"{results['utilization']:.1%}",
-                f"{results['total_fleet']:,}",
-                f"${results['platform_profit']:,.0f}",
-                f"{results['idle_time']:.1f} min",
-                f"{results['empty_distance']:.2f} km",
-                f"{results['drivers_meeting_target']:.0%}",
-                f"{results['demand_fulfilled']:.1%}"
-            ]
-        })
-        st.dataframe(perf_metrics, hide_index=True, use_container_width=True)
-        st.markdown("""
-        <div class='info-box'>
-        <strong>Interpretation:</strong><br>
-        <ul>
-        <li><b>Service Level</b>: Fraction of customer orders fulfilled on time. High values (95%+) indicate reliable delivery.</li>
-        <li><b>Driver Utilization</b>: Proportion of time drivers are actively delivering. Higher utilization means less idle time and better earnings.</li>
-        <li><b>Fleet Size</b>: Number of drivers needed to meet demand and service targets.</li>
-        <li><b>Platform Profit</b>: Estimated daily profit for the delivery platform, after costs.</li>
-        <li><b>Idle Time</b>: Average time drivers spend waiting for orders.</li>
-        <li><b>Empty Distance</b>: Average distance driven without a passenger/order.</li>
-        <li><b>Drivers Meeting Target</b>: Fraction of drivers meeting utilization goals.</li>
-        <li><b>Demand Fulfilled</b>: Fraction of total demand served.</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        st.info("👆 Please run optimization first to see analysis")
 
 with tab4:
     st.header("Benchmark Comparison")
@@ -874,46 +832,29 @@ with tab4:
 
 with tab5:
     st.header("Technical Implementation Details")
-    with st.expander("🎯 Problem Formulation & Methods", expanded=True):
+    with st.expander("🎯 Problem Formulation", expanded=True):
         st.markdown("""
-        ### Two-Stage Stochastic Optimization (Simple Explanation)
-        <ul>
-        <li><b>Goal:</b> Find the best number of drivers (fleet size) to balance customer service and driver earnings.</li>
-        <li><b>Stage 1:</b> Decide how many drivers to deploy for each time period.</li>
-        <li><b>Stage 2:</b> Simulate real-world uncertainty (demand, driver behavior) and adjust decisions to maximize profit and service.</li>
-        </ul>
-        <br>
-        <b>Mathematical Model:</b>
+        ### Two-Stage Stochastic Optimization
+        
+        **Mathematical Model:**
         """)
         st.latex(r"\min_{x,\alpha} \sum_{p=1}^P c_p x_p + \alpha")
         st.latex(r"\text{s.t. } \alpha \geq w_s f^{serv}(\beta, Q(x)) + (1-w_s) f^{util}(\mu, L(x))")
-        st.markdown("""
-        <ul>
-        <li><b>Value Function Approximation (VFA):</b> Uses machine learning to estimate the best decisions over time, even with complex uncertainty.</li>
-        <li><b>Markov Decision Process (MDP):</b> Models the delivery system as a sequence of decisions, considering future impact.</li>
-        <li><b>Boltzmann Exploration:</b> Smart way to try different strategies and learn which works best.</li>
-        <li><b>Parametric Cost Function:</b> Flexible way to model costs and penalties for missed service or low utilization.</li>
-        </ul>
-        <br>
-        <b>Recruiter-Friendly Summary:</b> This project combines advanced optimization and machine learning to solve a real business problem—how many drivers to deploy for crowdsourced delivery, balancing customer satisfaction and driver earnings. The solution is scalable, fast, and proven on 100M+ real trips.
-        """, unsafe_allow_html=True)
 
 with tab6:
     st.header("Documentation & Resources")
     with st.expander("📚 Research Paper", expanded=True):
         st.markdown("""
-        ### Advanced Value Function Approximation for Crowdsourced Delivery Operations
+        ### Fleet Size Planning in Crowdsourced Delivery
         
         **Authors:** Aliaa Alnaggar, Sahil Bhatt  
         **Journal:** Omega - The International Journal of Management Science  
-        **Status:** Under review (submitted 2024)
+        **Status:** Submitted (2024)
         
-        <b>Project Characterization:</b><br>
-        <span style='font-size:1.1em;'>Advanced Value Function Approximation for Crowdsourced Delivery Operations 📚 Research Implementation | 🏆 M.S. Thesis Project | 📊 100M+ Trips Analyzed</span>
-        <br><br>
-        <b>Abstract:</b>  
-        This research introduces a scalable optimization framework for fleet size planning in crowdsourced delivery, analyzing over 100 million real-world trips. The approach balances service level and driver utilization using advanced machine learning and stochastic optimization. Results show significant improvements in operational efficiency and driver satisfaction. The work is currently under review at Omega Journal.
-        """, unsafe_allow_html=True)
+        **Abstract:**  
+        This paper addresses the fleet size planning problem for crowdsourced delivery platforms, 
+        focusing on optimizing the number of crowdsourced drivers to balance service level and utilization.
+        """)
 
 # Footer
 st.markdown("---")
@@ -931,7 +872,3 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-
-
-
