@@ -403,18 +403,15 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
     else:
         return [0.35, 0.30, 0.20, 0.10, 0.05]
 
-############################################################
 # Sidebar with enhanced design
-############################################################
 with st.sidebar:
-    # Logo section (robust, avoids 'undefined' artifact some browsers showed with raw HTML)
-    def _render_logo():
-        try:
-            st.image("assets/logo.jpg", use_container_width=True, caption=None)
-        except Exception:
-            st.markdown("**Fleet Size Optimizer**")
-            st.caption("Logo unavailable")
-    _render_logo()
+    # Full-width logo section
+    st.markdown("""
+    <div style='margin: 0; padding: 0;'>
+        <img src="https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg" 
+             style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;" />
+    </div>
+    """, unsafe_allow_html=True)
 
 
     st.header("⚙️ Configuration Panel")
@@ -1070,4 +1067,5 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
 
