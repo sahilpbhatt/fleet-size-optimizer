@@ -273,6 +273,10 @@ with st.expander("🛠️ **Technology Stack & Methods**", expanded=False):
         - 1000+ iterations convergence
         """)
 
+# Initialize session state for quick demo
+if 'quick_demo' not in st.session_state:
+    st.session_state.quick_demo = False
+
 # Load pre-computed results (from research paper)
 @st.cache_data
 def load_precomputed_results():
@@ -406,10 +410,13 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
 # Sidebar with enhanced design
 with st.sidebar:
     # Full-width logo section
-    try:
-        st.image("assets/logo.jpg", use_container_width=True)
-    except Exception as e:
-        st.error(f"Error loading logo: {e}")
+    st.markdown("""
+    <div style='margin: 0; padding: 0;'>
+        <img src="https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg" 
+             style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;" />
+    </div>
+    """, unsafe_allow_html=True)
+
 
     st.header("⚙️ Configuration Panel")
     
@@ -1064,5 +1071,3 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-
