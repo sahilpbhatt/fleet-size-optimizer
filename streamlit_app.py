@@ -406,13 +406,10 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
 # Sidebar with enhanced design
 with st.sidebar:
     # Full-width logo section
-    st.markdown("""
-    <div style='margin: 0; padding: 0;'>
-        <img src="https://raw.githubusercontent.com/sahilpbhatt/fleet-size-optimizer/main/assets/logo.jpg" 
-             style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;" />
-    </div>
-    """, unsafe_allow_html=True)
-
+    try:
+        st.image("assets/logo.jpg", use_container_width=True)
+    except Exception as e:
+        st.error(f"Error loading logo: {e}")
 
     st.header("⚙️ Configuration Panel")
     
