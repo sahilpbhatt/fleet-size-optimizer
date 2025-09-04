@@ -403,26 +403,18 @@ def calculate_utilization_distribution(avg_util: float, fleet_size: int) -> List
     else:
         return [0.35, 0.30, 0.20, 0.10, 0.05]
 
+############################################################
 # Sidebar with enhanced design
+############################################################
 with st.sidebar:
-    # Full-width logo section using a local asset instead of GitHub URL
-    try:
-        # Read image file and encode to base64
-        with open("assets/logo.jpg", "rb") as f:
-            img_data = base64.b64encode(f.read()).decode()
-        
-        # Display image using HTML with base64 encoded image
-        st.markdown(f"""
-        <div style='margin: 0; padding: 0;'>
-            <img src="data:image/jpeg;base64,{img_data}"
-                 style="width: 100%; height: auto; border-radius: 0; display: block; margin: 0; padding: 0;" 
-                 alt="Fleet Optimizer Logo" />
-        </div>
-        """, unsafe_allow_html=True)
-    except Exception:
-        # Fallback if local image fails
-        st.header("Fleet Size Optimizer")
-        st.markdown("*Advanced Optimization Platform*")
+    # Logo section (robust, avoids 'undefined' artifact some browsers showed with raw HTML)
+    def _render_logo():
+        try:
+            st.image("assets/logo.jpg", use_container_width=True, caption=None)
+        except Exception:
+            st.markdown("**Fleet Size Optimizer**")
+            st.caption("Logo unavailable")
+    _render_logo()
 
 
     st.header("⚙️ Configuration Panel")
